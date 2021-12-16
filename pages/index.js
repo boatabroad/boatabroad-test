@@ -11,7 +11,7 @@ export default function Home({ exploreData, cardsData }) {
     <div className="">
       <Head>
         <title>Boatabroad - Boat Rentals</title>
-        <link rel="icon" href="/img/gisotipo.svg" />
+        <link rel="icon" href="/isotipo.svg" />
       </Head>
 
       <Header />
