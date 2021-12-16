@@ -55,7 +55,7 @@ function Header({ placeholder }) {
         className="flex lg:hidden relative items-center h-9 cursor-pointer my-auto">
 
         <Image
-          src="/isotipo.svg"
+          src="/public/img/isotipo.svg"
           layout="fill"
           objectFit="contain"
           objectPosition="left"
@@ -65,7 +65,7 @@ function Header({ placeholder }) {
         onClick={() => router.push("/")}
         className="hidden lg:flex relative items-center h-5 cursor-pointer my-auto">
         <Image
-          src="/logo.svg"
+          src="/public/img/logo.svg"
           layout="fill"
           objectFit="contain"
           objectPosition="left"
