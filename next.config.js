@@ -1,5 +1,5 @@
 module.exports = {
-  basePath: '/public/img/',
+  basePath: '/public/img',
   images: {
     domains: ["links.papareact.com"],
   },
