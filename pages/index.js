@@ -11,7 +11,7 @@ export default function Home({ exploreData, cardsData }) {
     <div className="">
       <Head>
         <title>Boatabroad - Boat Rentals</title>
-        <link rel="icon" href="/img/isotipo.svg" />
+        <link rel="icon" href="/icon.svg" />
       </Head>
 
       <Header />
@@ -38,7 +38,7 @@ export default function Home({ exploreData, cardsData }) {
           <h2 className='text-4xl font-semibold pb-2'>Sail Anywhere</h2>
 
           {/* Pull some data from a server - API endpoints */}
-          <div className='flex space-x-3 overflow-scroll scrollbar-hide p-3 -ml-3'>
+          <div className='flex space-x-8 overflow-scroll scrollbar-hide p-3 -ml-3'>
             {cardsData?.map(({ img, title }) => (
               <Cards
                 key={img}
@@ -68,7 +68,7 @@ export default function Home({ exploreData, cardsData }) {
 }
 
 export async function getStaticProps() {
-  const exploreData = await fetch('https://links.papareact.com/pyp').
+  const exploreData = await fetch('https://jsonkeeper.com/b/VG78').
     then(
       (res) => res.json()
     );

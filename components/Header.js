@@ -55,7 +55,7 @@ function Header({ placeholder }) {
         className="flex lg:hidden relative items-center h-9 cursor-pointer my-auto">
 
         <Image
-          src="/isotipo.svg"
+          src="/icon.svg"
           layout="fill"
           objectFit="contain"
           objectPosition="left"
@@ -113,8 +113,12 @@ function Header({ placeholder }) {
           </div>
 
           <div className="flex ">
-            <button onClick={resetInput} className="flex-grow text-red-500">Cancel</button>
-            <button onClick={search} className="flex-grow text-gray-500">Search</button>
+            <button
+              onClick={resetInput}
+              className="flex-grow text-gray-500 button hover:bg-red-500 hover:text-white mx-1">Cancel</button>
+            <button
+              onClick={search}
+              className="flex-grow text-gray-500 button hover:bg-[#00BFC1] hover:text-white mx-1">Search</button>
           </div>
         </div>
       )}
