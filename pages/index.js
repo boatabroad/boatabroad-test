@@ -17,12 +17,12 @@ export default function Home({ exploreData, cardsData }) {
       <Header />
       <Banner />
 
-      <main className='mx-auto px-8 md:px-16'>
-        <section className="pt-10">
-          <h2 className="text-4xl font-semibold pb-5">Explore Boats</h2>
+      <main className='mx-auto px-8 md:px-16 py-16'>
+        <section className='pb-14'>
+          <h2 className="text-4xl font-semibold mb-4">Explore Boats</h2>
 
           {/* Pull some data from a server - API endpoints */}
-          <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+          <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4'>
             {exploreData?.map(({ img, distance, location }) => (
               <SmallCard
                 key={img}
@@ -34,11 +34,11 @@ export default function Home({ exploreData, cardsData }) {
           </div>
         </section>
 
-        <section className='pt-10'>
-          <h2 className='text-4xl font-semibold pb-2'>Sail Anywhere</h2>
+        <section className='pb-14'>
+          <h2 className='text-4xl font-semibold mb-7'>Sail Anywhere</h2>
 
           {/* Pull some data from a server - API endpoints */}
-          <div className='flex space-x-8 overflow-scroll scrollbar-hide p-3 -ml-3'>
+          <div className='cards flex space-x-5 overflow-scroll scrollbar-hide p-3 -ml-3'>
             {cardsData?.map(({ img, title }) => (
               <Cards
                 key={img}
@@ -50,9 +50,9 @@ export default function Home({ exploreData, cardsData }) {
         </section>
 
         <LargeCard
-          img='https://links.papareact.com/4cj'
-          title='The Greatest Outdoors'
-          description='Wishlist curated by Boatabroad'
+          img='https://boatabroad.com/wp-content/uploads/2021/12/alina-kacharho-86wR5GZJZdQ-unsplash.jpg'
+          title='Rent your boat'
+          description='Earn extra income and unlock new opportunities by sharing your boat'
           buttonText='Get Inspired'
         />
       </main>
@@ -68,12 +68,12 @@ export default function Home({ exploreData, cardsData }) {
 }
 
 export async function getStaticProps() {
-  const exploreData = await fetch('https://jsonkeeper.com/b/VG78').
+  const exploreData = await fetch('https://jsonkeeper.com/b/NJ7H').
     then(
       (res) => res.json()
     );
 
-  const cardsData = await fetch('https://links.papareact.com/zp1').
+  const cardsData = await fetch('https://jsonkeeper.com/b/UM02').
     then(
       (res) => res.json()
     );

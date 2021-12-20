@@ -9,7 +9,7 @@ function Banner() {
         objectFit="cover"
         objectPosition="bottom center"
       />
-      <div className="absolute h-full w-full bg-[#000] opacity-20">
+      <div className="absolute h-full w-full bg-gradient-to-t from-black to-[#f2f2f2] opacity-25 mix-blend-multiply">
 
       </div>
 

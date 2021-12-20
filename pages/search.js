@@ -17,16 +17,16 @@ function Search({ searchResults }) {
       <Header placeholder={`${location} | ${dateRange} | ${noOfSailors}`} />
 
       <main className="flex px-8 md:px-16">
-        <section className="flex-grow pt-14 mr-5">
-          <p className="text-xs">300+ stays, from {dateRange}, for {noOfSailors} sailors</p>
+        <section className="flex-grow pt-14 lg:mr-5">
+          <p className="text-xs">100+ boats, from {dateRange}, for {noOfSailors} sailors</p>
 
-          <h1 className="text-3xl font-semibold mt-2 mb-6">Stays in {location}</h1>
+          <h1 className="text-3xl font-semibold mt-2 mb-6">Boats in {location}</h1>
 
           <div className="hidden md:inline-flex space-x-3 mb-5 text-gray-800 whitespace-nowrap">
             <p className="button">Cancellation Flexibility</p>
             <p className="button">Type of Boat</p>
             <p className="button">Price</p>
-            <p className="button">Rooms and Beds</p>
+            <p className="button">Sailors</p>
             <p className="button">More Filters</p>
           </div>
 
@@ -60,7 +60,7 @@ function Search({ searchResults }) {
 
 export default Search
 export async function getServerSideProps() {
-  const searchResults = await fetch('https://links.papareact.com/isz').
+  const searchResults = await fetch('https://jsonkeeper.com/b/5DZY').
     then(
       (res) => res.json()
     );
