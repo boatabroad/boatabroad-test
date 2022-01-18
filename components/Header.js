@@ -12,6 +12,7 @@ import {
   GlobeAltIcon,
 } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
+import { MenuPopup } from "./MenuPopup";
 
 function Header({ placeholder }) {
   const [searchInput, setSearchInput] = useState("");
@@ -19,6 +20,7 @@ function Header({ placeholder }) {
   const [endDate, setEndDate] = useState(new Date());
   const [noOfSailors, setNoOfSailors] = useState(1);
   const router = useRouter();
+  const [menuPopup, setMenuPopup] = useState(false);
 
   const handleSelect = (ranges) => {
     setStartDate(ranges.selection.startDate);
@@ -47,8 +49,18 @@ function Header({ placeholder }) {
     key: 'selection'
   };
 
+  const clickPopup = () => {
+    if (menuPopup == true) {
+      setMenuPopup(false);
+      console.log("Ocultar menu")
+    } else {
+      setMenuPopup(true);
+      console.log("Mostrar menu")
+    }
+  }
+
   return (
-    <header className="bg-white sticky top-0 z-50 grid grid-cols-3 shadow-md py-4 px-8 md:px-16">
+    <header className="bg-white sticky top-0 z-40 grid grid-cols-3 shadow-md py-4 px-8 md:px-16">
       {/* Left - Logo */}
       <div
         onClick={() => router.push("/")}
@@ -86,9 +98,13 @@ function Header({ placeholder }) {
 
       {/* Right */}
       <div className="flex space-x-6 items-center justify-end">
-        {/* <p>Log in</p> */}
         <UsersIcon className="h-6 cursor-pointer" />
-        <MenuAlt4Icon className="h-8 cursor-pointer" />
+        <MenuAlt4Icon
+          onClick={clickPopup}
+          className="h-8 cursor-pointer" />
+        {menuPopup && (
+          <MenuPopup />
+        )}
       </div>
 
       {searchInput && (

@@ -34,7 +34,7 @@ function Footer() {
         <p>Newsroom</p>
         <p>Investors</p>
         <p>Boatabroad Plus</p>
-        <p>Airbnb Luxe</p>
+        <p>Boatabroad Luxe</p>
       </div>
     </div>
   )
