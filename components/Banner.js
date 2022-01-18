@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 function Banner() {
   return (
@@ -9,15 +9,15 @@ function Banner() {
         objectFit="cover"
         objectPosition="bottom center"
       />
-      <div className="absolute h-full w-full bg-gradient-to-t from-black to-[#f2f2f2] opacity-25 mix-blend-multiply">
-
-      </div>
+      <div className="absolute h-full w-full bg-gradient-to-t from-black to-[#f2f2f2] opacity-25 mix-blend-multiply"></div>
 
       <div className="absolute w-1/2 md:w-1/3 bottom-0 p-8 md:px-16">
-        <h1 className=" text-white text-4xl md:text-6xl lg:text-7xl font-montserrat font-semibold">Sail the World</h1>
+        <h1 className=" text-white text-4xl md:text-6xl lg:text-7xl font-montserrat font-semibold">
+          Sail the World
+        </h1>
       </div>
-    </div >
-  )
+    </div>
+  );
 }
 
-export default Banner
+export default Banner;

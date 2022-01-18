@@ -1,21 +1,14 @@
-import Image from "next/image";
+import Image from 'next/image';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
-import { useState } from "react";
-import {
-  SearchIcon,
-  MenuIcon,
-  MenuAlt4Icon,
-  UsersIcon,
-  UserIcon,
-  GlobeAltIcon,
-} from "@heroicons/react/solid";
-import { useRouter } from "next/router";
-import { MenuPopup } from "./MenuPopup";
+import { useState } from 'react';
+import { SearchIcon, MenuAlt4Icon, UsersIcon } from '@heroicons/react/solid';
+import { useRouter } from 'next/router';
+import { MenuPopup } from './MenuPopup';
 
 function Header({ placeholder }) {
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [noOfSailors, setNoOfSailors] = useState(1);
@@ -28,7 +21,7 @@ function Header({ placeholder }) {
   };
 
   const resetInput = () => {
-    setSearchInput("");
+    setSearchInput('');
   };
 
   const search = () => {
@@ -46,26 +39,26 @@ function Header({ placeholder }) {
   const selectionRange = {
     startDate: startDate,
     endDate: endDate,
-    key: 'selection'
+    key: 'selection',
   };
 
   const clickPopup = () => {
     if (menuPopup == true) {
       setMenuPopup(false);
-      console.log("Ocultar menu")
+      console.log('Ocultar menu');
     } else {
       setMenuPopup(true);
-      console.log("Mostrar menu")
+      console.log('Mostrar menu');
     }
-  }
+  };
 
   return (
     <header className="bg-white sticky top-0 z-40 grid grid-cols-3 shadow-md py-4 px-8 md:px-16">
       {/* Left - Logo */}
       <div
-        onClick={() => router.push("/")}
-        className="flex lg:hidden relative items-center h-9 cursor-pointer my-auto">
-
+        onClick={() => router.push('/')}
+        className="flex lg:hidden relative items-center h-9 cursor-pointer my-auto"
+      >
         <Image
           src="/icon.svg"
           layout="fill"
@@ -74,8 +67,9 @@ function Header({ placeholder }) {
         />
       </div>
       <div
-        onClick={() => router.push("/")}
-        className="hidden lg:flex relative items-center h-5 cursor-pointer my-auto">
+        onClick={() => router.push('/')}
+        className="hidden lg:flex relative items-center h-5 cursor-pointer my-auto"
+      >
         <Image
           src="/logo.svg"
           layout="fill"
@@ -91,7 +85,7 @@ function Header({ placeholder }) {
           onChange={(e) => setSearchInput(e.target.value)}
           className=" flex-grow pl-5 bg-transparent outline-none text-sm text-gray-600 placeholder-gray-400"
           type="text"
-          placeholder={placeholder || "start your search"}
+          placeholder={placeholder || 'start your search'}
         />
         <SearchIcon className="hidden md:inline-flex h-8 bg-[#00BFC1] text-white rounded-full p-2 cursor-pointer md:mx-2" />
       </div>
@@ -99,12 +93,8 @@ function Header({ placeholder }) {
       {/* Right */}
       <div className="flex space-x-6 items-center justify-end">
         <UsersIcon className="h-6 cursor-pointer" />
-        <MenuAlt4Icon
-          onClick={clickPopup}
-          className="h-8 cursor-pointer" />
-        {menuPopup && (
-          <MenuPopup />
-        )}
+        <MenuAlt4Icon onClick={clickPopup} className="h-8 cursor-pointer" />
+        {menuPopup && <MenuPopup />}
       </div>
 
       {searchInput && (
@@ -112,16 +102,18 @@ function Header({ placeholder }) {
           <DateRangePicker
             ranges={[selectionRange]}
             minDate={new Date()}
-            rangeColors={["#00BFC1"]}
+            rangeColors={['#00BFC1']}
             onChange={handleSelect}
           />
 
           <div className="flex items-center border-b mb-4">
-            <h2 className="text-2xl font-semibold flex-grow">Number of Sailors</h2>
+            <h2 className="text-2xl font-semibold flex-grow">
+              Number of Sailors
+            </h2>
             <UsersIcon className="h-5" />
             <input
               value={noOfSailors}
-              onChange={e => setNoOfSailors(e.target.value)}
+              onChange={(e) => setNoOfSailors(e.target.value)}
               min={1}
               className="w-12 pl-4 text-lg text-red-500 outline-none"
               type="number"
@@ -131,15 +123,21 @@ function Header({ placeholder }) {
           <div className="flex ">
             <button
               onClick={resetInput}
-              className="flex-grow text-gray-500 button hover:bg-red-500 hover:text-white mx-1">Cancel</button>
+              className="flex-grow text-gray-500 button hover:bg-red-500 hover:text-white mx-1"
+            >
+              Cancel
+            </button>
             <button
               onClick={search}
-              className="flex-grow text-gray-500 button hover:bg-[#00BFC1] hover:text-white mx-1">Search</button>
+              className="flex-grow text-gray-500 button hover:bg-[#00BFC1] hover:text-white mx-1"
+            >
+              Search
+            </button>
           </div>
         </div>
       )}
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;

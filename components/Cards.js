@@ -1,12 +1,12 @@
-import Image from "next/image";
-import { useState } from "react";
-import { useRouter } from "next/router";
+import Image from 'next/image';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 function Cards({ img, title }) {
-  const [searchInput, setSearchInput] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [noOfSailors, setNoOfSailors] = useState();
+  const [searchInput] = useState('');
+  const [startDate] = useState(new Date());
+  const [endDate] = useState(new Date());
+  const [noOfSailors] = useState();
   const router = useRouter();
 
   const search = () => {
@@ -24,15 +24,11 @@ function Cards({ img, title }) {
   return (
     <div className="cursor-pointer hover:scale-105 transform transition duration-300 ease-out">
       <div onClick={search} className="relative h-72 w-72">
-        <Image
-          src={img}
-          layout="fill"
-          className="rounded-xl"
-        />
+        <Image src={img} layout="fill" className="rounded-xl" />
       </div>
       <h3 className="text-xl mt-3">{title}</h3>
     </div>
-  )
+  );
 }
 
-export default Cards
+export default Cards;

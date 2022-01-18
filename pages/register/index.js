@@ -1,10 +1,8 @@
-import React from 'react'
-import RegisterComponent from './registerComponent'
+import React from 'react';
+import RegisterComponent from './registerComponent';
 
 const index = () => {
-    return (
-        <RegisterComponent />
-    )
-}
+  return <RegisterComponent />;
+};
 
-export default index
+export default index;

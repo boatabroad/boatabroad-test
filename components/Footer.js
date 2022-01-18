@@ -37,7 +37,7 @@ function Footer() {
         <p>Boatabroad Luxe</p>
       </div>
     </div>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

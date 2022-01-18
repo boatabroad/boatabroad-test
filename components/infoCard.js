@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { HeartIcon } from "@heroicons/react/outline";
-import { StarIcon } from "@heroicons/react/solid";
+import Image from 'next/image';
+import { HeartIcon } from '@heroicons/react/outline';
+import { StarIcon } from '@heroicons/react/solid';
 
 function InfoCard({ img, location, title, description, star, price, total }) {
   return (
@@ -35,10 +35,9 @@ function InfoCard({ img, location, title, description, star, price, total }) {
             <p className="text-right font-extralight">{total}</p>
           </div>
         </div>
-
       </div>
     </div>
-  )
+  );
 }
 
-export default InfoCard
+export default InfoCard;
