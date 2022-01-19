@@ -1,4 +1,4 @@
-import React from 'react';
+import Link from 'next/link';
 
 export const MenuPopup = () => {
   return (
@@ -10,9 +10,11 @@ export const MenuPopup = () => {
           </a>
         </li>
         <li className="text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
-          <a className="cursor-pointer" href="#">
-            Sign up
-          </a>
+          <Link href="/register">
+            <a className="cursor-pointer" href="#">
+              Sign up
+            </a>
+          </Link>
         </li>
         <li className="text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
           <a className="cursor-pointer" href="#">

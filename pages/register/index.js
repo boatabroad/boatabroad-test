@@ -1,4 +1,3 @@
-import React from 'react';
 import RegisterComponent from '../../components/Register';
 
 const index = () => {

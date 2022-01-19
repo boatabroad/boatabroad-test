@@ -45,10 +45,8 @@ function Header({ placeholder }) {
   const clickPopup = () => {
     if (menuPopup == true) {
       setMenuPopup(false);
-      console.log('Ocultar menu');
     } else {
       setMenuPopup(true);
-      console.log('Mostrar menu');
     }
   };
 
