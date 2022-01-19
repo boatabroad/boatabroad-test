@@ -15,5 +15,3 @@ export const createAccount = (email, password) => {
       throw error;
     });
 };
-
-console.log('remove this');
