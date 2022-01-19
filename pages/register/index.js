@@ -1,5 +1,5 @@
 import React from 'react';
-import RegisterComponent from './registerComponent';
+import RegisterComponent from '../../components/Register';
 
 const index = () => {
   return <RegisterComponent />;
