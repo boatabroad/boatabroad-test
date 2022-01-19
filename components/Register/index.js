@@ -1,42 +1,37 @@
 import { useState } from 'react';
 
 const RegisterComponent = () => {
-  const [credentials, setCredentials] = useState({
-    username: '',
-    password: '',
-  });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
 
   const handleLoginForm = (evt) => {
     evt.preventDefault();
+    const givenErrors = validateCredentials(username, password);
+    setErrors(givenErrors);
 
-    setErrors(() => ({ ...validateCredentials(credentials) }));
+    if (!Object.keys(givenErrors).length) {
+      // The form is correct, so we can create the account
+      console.log('creating account', username, password);
+    }
   };
 
-  const validateCredentials = (credentials) => {
+  const validateCredentials = (username, password) => {
     let errors = {};
 
-    if (credentials.username === '') {
+    if (username === '') {
       errors = Object.assign(errors, {
         username: 'This field is required',
       });
     }
 
-    if (credentials.password === '') {
+    if (password === '') {
       errors = Object.assign(errors, {
         password: 'This field is required',
       });
     }
 
     return errors;
-  };
-
-  const handleInputChange = (evt) => {
-    evt.persist();
-    setCredentials((credentials) => ({
-      ...credentials,
-      [evt.target.name]: evt.target.value,
-    }));
   };
 
   return (
@@ -60,8 +55,8 @@ const RegisterComponent = () => {
           name="username"
           type="text"
           placeholder="e.g. some.example"
-          value={credentials.username}
-          onChange={handleInputChange.bind(this)}
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
         />
         {errors.hasOwnProperty('username') && (
           <p className="text-red-500 text-xs italic">{errors.username}</p>
@@ -83,8 +78,8 @@ const RegisterComponent = () => {
           name="password"
           type="password"
           placeholder="* * * * * * * *"
-          value={credentials.password}
-          onChange={handleInputChange.bind(this)}
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
         />
         {errors.hasOwnProperty('username') && (
           <p className="text-red-500 text-xs italic">{errors.username}</p>
