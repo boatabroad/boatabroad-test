@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { createAccount } from 'utils/firebase';
+import { useRouter } from 'next/router';
 
 const RegisterComponent = () => {
+  const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
@@ -22,6 +24,7 @@ const RegisterComponent = () => {
       createAccount(username, password)
         .then((user) => {
           localStorage.setItem('userAccessToken', user.accessToken);
+          router.push('/');
         })
         .catch(() => {
           setCreatingAccount(false);
