@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { createAccount } from 'utils/firebase';
 import { useRouter } from 'next/router';
-
 const RegisterComponent = () => {
   const router = useRouter();
   const [username, setUsername] = useState('');
@@ -24,7 +23,7 @@ const RegisterComponent = () => {
       createAccount(username, password)
         .then((user) => {
           localStorage.setItem('userAccessToken', user.accessToken);
-          router.push('/');
+          router.replace('/dashboard');
         })
         .catch(() => {
           setCreatingAccount(false);
@@ -47,65 +46,62 @@ const RegisterComponent = () => {
   };
 
   return (
-    <form
-      className="flex flex-wrap w-full"
-      onSubmit={handleLoginForm.bind(this)}
-    >
-      <section className="pl-6 pr-3 w-1/2">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="username"
-        >
-          Email
-        </label>
-        <input
-          id="username"
-          className={
-            'border mb-2 py-2 px-3 rounded text-gray-700 w-full focus:bg-primary ' +
-            (errors.username ? 'border-red-500' : '')
-          }
-          name="username"
-          type="text"
-          placeholder="e.g. some.example"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-        {errors.username && (
-          <p className="text-red-500 text-xs italic">{errors.username}</p>
-        )}
-      </section>
-      <section className="pl-3 pr-6 w-1/2">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="password"
-        >
-          Password
-        </label>
-        <input
-          id="password"
-          className={
-            'border mb-2 py-2 px-3 rounded text-gray-700 w-full focus:bg-primary ' +
-            (errors.password ? 'border-red-500' : '')
-          }
-          name="password"
-          type="password"
-          placeholder="* * * * * * * *"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        {errors.password && (
-          <p className="text-red-500 text-xs italic">{errors.password}</p>
-        )}
-      </section>
-      <section className="flex justify-end px-6 mt-3 w-full">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:border-none"
-          disabled={creatingAccount}
-        >
-          {creatingAccount ? 'Signing up...' : 'Sign up'}
-        </button>
-      </section>
-    </form>
+    <div className="h-screen flex bg-gray-bg1">
+      <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16">
+        <h1 className="text-2xl font-medium text-primary mt-4 mb-12 text-center">
+          Registrarse en BoataBroad 🔐
+        </h1>
+
+        <form onSubmit={handleLoginForm.bind(this)}>
+          <div>
+            <label htmlFor="email">Correo</label>
+            <input
+              id="username"
+              className={
+                'border mb-2 py-2 px-3 rounded text-gray-700 w-full focus:bg-primary ' +
+                (errors.username ? 'border-red-500' : '')
+              }
+              name="username"
+              type="text"
+              placeholder="Example@something.com"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              autoComplete="off"
+            />
+            {errors.username && (
+              <p className="text-red-500 text-xs italic">{errors.username}</p>
+            )}
+          </div>
+          <div>
+            <label htmlFor="password">Contraseña</label>
+            <input
+              id="password"
+              className={
+                'border mb-2 py-2 px-3 rounded text-gray-700 w-full focus:bg-primary ' +
+                (errors.password ? 'border-red-500' : '')
+              }
+              name="password"
+              type="password"
+              placeholder="* * * * * * * *"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+            {errors.password && (
+              <p className="text-red-500 text-xs italic">{errors.password}</p>
+            )}
+          </div>
+
+          <div className="flex justify-center items-center mt-6">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:border-none"
+              disabled={creatingAccount}
+            >
+              {creatingAccount ? 'Alla vamos..' : 'Registrarme'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 
