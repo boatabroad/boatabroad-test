@@ -12,5 +12,6 @@ export const createAccount = (email, password) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error('error creating account', errorCode, errorMessage);
+      throw error;
     });
 };

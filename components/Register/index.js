@@ -19,9 +19,13 @@ const RegisterComponent = () => {
     if (!Object.keys(givenErrors).length) {
       // The form is correct, so we can create the account
       setCreatingAccount(true);
-      createAccount(username, password).finally(() => {
-        setCreatingAccount(false);
-      });
+      createAccount(username, password)
+        .then((user) => {
+          localStorage.setItem('userAccessToken', user.accessToken);
+        })
+        .catch(() => {
+          setCreatingAccount(false);
+        });
     }
   };
 
