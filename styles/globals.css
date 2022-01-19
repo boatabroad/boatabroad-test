@@ -6,9 +6,9 @@
 
 @layer components {
   .button {
-    @apply px-4 py-2 border rounded-full cursor-pointer hover:shadow-lg active:scale-95 active:bg-gray-100 transition transform duration-100 ease-out
+    @apply px-4 py-2 border rounded-full cursor-pointer hover:shadow-lg active:scale-95 active:bg-gray-100 transition transform duration-100 ease-out;
   }
   .bigMenu {
-    @apply top-16 right-16 px-4 py-4 bg-white rounded-xl w-44 shadow-gray-400 shadow-2xl z-50
+    @apply top-16 right-16 px-4 py-4 bg-white rounded-xl w-44 shadow-gray-400 shadow-2xl z-50;
   }
 }
