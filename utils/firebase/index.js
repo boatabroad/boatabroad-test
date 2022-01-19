@@ -17,4 +17,3 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 export * from './createAccount';
- 
