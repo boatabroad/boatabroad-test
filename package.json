@@ -10,6 +10,9 @@
   "dependencies": {
     "@badrap/bar-of-progress": "^0.1.2",
     "@heroicons/react": "^1.0.5",
+    "@stripe/react-stripe-js": "^1.7.0",
+    "@stripe/stripe-js": "^1.22.0",
+    "axios": "^0.25.0",
     "date-fns": "^2.27.0",
     "firebase": "^9.6.3",
     "geolib": "^3.3.3",
