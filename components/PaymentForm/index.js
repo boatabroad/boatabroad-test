@@ -38,7 +38,10 @@ const PaymentForm = () => {
     if (!error) {
       try {
         const { id } = paymentMethod;
-        const response = await axios.post('/api/payment', { id, amount: 1000 });
+        const response = await axios.post('/api/payments', {
+          id,
+          amount: 1000,
+        });
 
         if (response.data.success) {
           console.log('payment successful', response.data);
