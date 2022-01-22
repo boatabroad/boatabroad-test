@@ -57,7 +57,7 @@ const PaymentForm = (props) => {
           setSuccess(true);
           setTimeout(() => {
             router.push('/dashboard');
-          }, 2000);
+          }, 4000);
         }
       } catch (err) {
         console.log('there was a payment error', err);

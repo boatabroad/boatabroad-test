@@ -1,10 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import Stripe from 'stripe';
+import stripe from 'api/utils/stripe';
 import validateSchema from './schema';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2020-08-27',
-});
 
 export const createPayment = async (
   req: VercelRequest,
@@ -25,8 +21,6 @@ export const createPayment = async (
       payment_method: id,
       confirm: true,
     });
-
-    console.log('payment was created', payment);
 
     res.json({
       message: 'Payment created',
