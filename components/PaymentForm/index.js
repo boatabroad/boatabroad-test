@@ -32,7 +32,7 @@ const PaymentForm = () => {
     e.preventDefault();
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
-      elements: elements.getElement(CardElement),
+      card: elements.getElement(CardElement),
     });
 
     if (!error) {
