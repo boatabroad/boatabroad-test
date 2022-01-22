@@ -8,8 +8,10 @@ const validateSchema = (req: VercelRequest, res: VercelResponse) => {
       body: joi
         .object()
         .keys({
-          amount: joi.number().positive().required(),
           id: joi.string().required(),
+          amount: joi.number().positive().required(),
+          userId: joi.string().required(),
+          boatId: joi.string().required(),
         })
         .required(),
     })

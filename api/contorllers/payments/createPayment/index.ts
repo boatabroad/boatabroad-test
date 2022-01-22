@@ -14,11 +14,12 @@ export const createPayment = async (
   if (res.headersSent) {
     return;
   }
-  const { amount, id } = req.body;
+  const { amount, id, userId, boatId } = req.body;
 
   try {
     const payment = await stripe.paymentIntents.create({
       amount,
+      metadata: { userId, boatId },
       currency: 'USD',
       description: 'Example payment',
       payment_method: id,
