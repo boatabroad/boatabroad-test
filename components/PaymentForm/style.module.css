@@ -1,6 +1,6 @@
 .formGroup {
   margin: 0 15px 20px;
-  padding: 0;
+  padding: 10px;
   border-style: none;
   background-color: #7795f8;
   will-change: opacity, transform;
@@ -60,4 +60,11 @@
 
 .message {
   text-align: center;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

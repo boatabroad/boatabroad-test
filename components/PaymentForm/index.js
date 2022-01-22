@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
+import { useRouter } from 'next/router';
+import { ClimbingBoxLoader } from 'react-spinners';
 import style from './style.module.css';
 
 const CARD_OPTIONS = {
@@ -24,12 +26,15 @@ const CARD_OPTIONS = {
 };
 
 const PaymentForm = () => {
-  const [success, setSuccess] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const router = useRouter();
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: elements.getElement(CardElement),
@@ -43,33 +48,41 @@ const PaymentForm = () => {
           amount: 1000,
         });
 
-        if (response.data.success) {
-          console.log('payment successful', response.data);
+        if (response.status === 200) {
           setSuccess(true);
+          setTimeout(() => {
+            router.push('/dashboard');
+          }, 2000);
         }
       } catch (err) {
         console.log('there was a payment error', err);
       }
     }
+    setLoading(false);
   };
 
   return (
-    <div className="paymentForm">
+    <div className={style.paymentForm}>
       {!success ? (
         <form onSubmit={handleSubmit}>
           <fieldset className={style.formGroup}>
-            <div className={style.formRow}>
-              <CardElement options={CARD_OPTIONS} />
-            </div>
+            <CardElement options={CARD_OPTIONS} />
           </fieldset>
-          <button type="submit" className={style.payButton}>
-            Pay
-          </button>
+          {loading ? (
+            <div className={style.loadingContainer}>
+              We are processing you payment...
+              <ClimbingBoxLoader />
+            </div>
+          ) : (
+            <button type="submit" className={style.payButton}>
+              Pay
+            </button>
+          )}
         </form>
       ) : (
         <div>
           <h2 className="message">
-            You have successfully paid <span>$10</span>, thanks!
+            Congratulations! You have successfully rented this boat.
           </h2>
         </div>
       )}
