@@ -87,7 +87,8 @@ const PaymentForm = (props) => {
       ) : (
         <div>
           <h2 className="message">
-            Congratulations! You have successfully rented this boat.
+            Congratulations! You have successfully rented this boat. It will be
+            added to your boat list once the payment succeeds.
           </h2>
         </div>
       )}
