@@ -22,5 +22,6 @@ module.exports = {
     'react/prop-types': 'off',
     'no-prototype-builtins': 'off',
     'no-redeclare': 'error',
+    'react/no-unescaped-entities': 'off',
   },
 };

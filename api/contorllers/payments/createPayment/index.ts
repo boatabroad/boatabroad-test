@@ -4,6 +4,7 @@ import { db } from 'shared/utils/firebase';
 import stripe from 'api/utils/stripe';
 import validateSchema from './schema';
 import { setProcessingPayment } from './utils';
+import { validateBoatRental } from 'shared/utils/boat/validateBoatRental';
 
 export const createPayment = async (
   req: VercelRequest,
@@ -15,22 +16,11 @@ export const createPayment = async (
   }
   const { amount, id, userId, boatId } = req.body;
   const boat = (await getDoc(doc(collection(db, 'boats'), boatId))).data();
+  const validation = validateBoatRental(boat);
 
-  if (!boat.published) {
-    return res.status(409).json({
-      error: 'The boat is not published yet.',
-    });
-  }
-
-  if (boat.rentedBy) {
-    return res.status(409).json({
-      error: 'The boat is already rented by someone else.',
-    });
-  }
-
-  if (boat.processingPayment) {
-    return res.status(409).json({
-      error: 'The boat is already being rented by someone else.',
+  if (validation.error) {
+    return res.status(validation.status).json({
+      error: validation.error,
     });
   }
 
