@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { logIn } from 'shared/utils/firebase/logIn';
+import { useRouter } from 'next/router';
 
 const Login = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    let email = e.target.elements.email?.value;
-    let password = e.target.elements.password?.value;
-
-    console.log(email, password);
+    logIn(email, password).then(() => {
+      router.push('/dashboard');
+    });
   };
+
   return (
     <div className="h-screen flex bg-gray-bg1">
       <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16">
@@ -22,6 +28,8 @@ const Login = () => {
             <label htmlFor="email">Email</label>
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className={
                 'w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4'
               }
@@ -33,6 +41,8 @@ const Login = () => {
             <label htmlFor="password">Password</label>
             <input
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className={
                 'w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4'
               }
@@ -50,13 +60,13 @@ const Login = () => {
           <div className="flex justify-center items-center mt-6">
             <Link href="/register">
               <button className="bg-green py-2 px-4 text-sm text-black">
-                {"You Don't have Account?"}
+                {"Don't have an account?"}
               </button>
             </Link>
 
             <Link href="#">
               <button className="bg-green py-2 px-4 text-sm text-black">
-                I forget my Pass
+                I forgot my password
               </button>
             </Link>
           </div>
