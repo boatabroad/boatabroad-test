@@ -9,7 +9,6 @@ const useUser = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (newUser) => {
-      console.log('newUser', newUser);
       setUser(newUser);
     });
   }, []);
