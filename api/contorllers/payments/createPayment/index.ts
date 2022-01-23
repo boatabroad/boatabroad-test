@@ -1,4 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { collection, doc, getDoc } from 'firebase/firestore';
+import { db } from 'shared/utils/firebase';
 import stripe from 'api/utils/stripe';
 import validateSchema from './schema';
 import { setProcessingPayment } from './utils';
@@ -12,6 +14,19 @@ export const createPayment = async (
     return;
   }
   const { amount, id, userId, boatId } = req.body;
+  const boat = (await getDoc(doc(collection(db, 'boats'), boatId))).data();
+
+  if (boat.rentedBy) {
+    return res.status(409).json({
+      error: 'Boat is already rented',
+    });
+  }
+
+  if (boat.processingPayment) {
+    return res.status(409).json({
+      error: 'Boat is already being rented',
+    });
+  }
 
   try {
     await setProcessingPayment(boatId, true);
