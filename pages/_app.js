@@ -1,6 +1,7 @@
-import 'styles/globals.css';
-import ProgressBar from '@badrap/bar-of-progress';
 import { Router } from 'next/router';
+import Head from 'next/head';
+import ProgressBar from '@badrap/bar-of-progress';
+import 'styles/globals.css';
 
 const progress = new ProgressBar({
   size: 2,
@@ -14,7 +15,15 @@ Router.events.on('routeChangeComplete', progress.finish);
 Router.events.on('routeChangeError', progress.finish);
 
 function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Head>
+        <title>Boatabroad - Boat Rentals</title>
+        <link rel="icon" href="/icon.svg" />
+        <Component {...pageProps} />
+      </Head>
+    </>
+  );
 }
 
 export default App;
