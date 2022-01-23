@@ -16,15 +16,21 @@ export const createPayment = async (
   const { amount, id, userId, boatId } = req.body;
   const boat = (await getDoc(doc(collection(db, 'boats'), boatId))).data();
 
+  if (!boat.published) {
+    return res.status(409).json({
+      error: 'The boat is not published yet.',
+    });
+  }
+
   if (boat.rentedBy) {
     return res.status(409).json({
-      error: 'Boat is already rented',
+      error: 'The boat is already rented by someone else.',
     });
   }
 
   if (boat.processingPayment) {
     return res.status(409).json({
-      error: 'Boat is already being rented',
+      error: 'The boat is already being rented by someone else.',
     });
   }
 
