@@ -14,7 +14,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+export default initializeApp(firebaseConfig);
 
 export const db = getFirestore();
 // getDocs(collection(db, 'boats')).then((boats) => {

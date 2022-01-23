@@ -1,7 +1,12 @@
-import RegisterComponent from 'components/Register';
+import Register from 'components/Register';
+import useUser from 'hooks/useUser';
 
-const index = () => {
-  return <RegisterComponent />;
+const RegisterPage = () => {
+  const user = useUser();
+
+  console.log('user', user);
+
+  return <Register />;
 };
 
-export default index;
+export default RegisterPage;

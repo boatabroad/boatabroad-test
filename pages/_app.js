@@ -20,8 +20,8 @@ function App({ Component, pageProps }) {
       <Head>
         <title>Boatabroad - Boat Rentals</title>
         <link rel="icon" href="/icon.svg" />
-        <Component {...pageProps} />
       </Head>
+      <Component {...pageProps} />
     </>
   );
 }

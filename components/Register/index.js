@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { createAccount } from 'shared/utils/firebase';
 import { useRouter } from 'next/router';
 
-const RegisterComponent = () => {
+const Register = () => {
   const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -22,8 +22,7 @@ const RegisterComponent = () => {
       // The form is correct, so we can create the account
       setCreatingAccount(true);
       createAccount(username, password)
-        .then((user) => {
-          localStorage.setItem('userAccessToken', user.accessToken);
+        .then(() => {
           router.replace('/dashboard');
         })
         .catch(() => {
@@ -106,4 +105,4 @@ const RegisterComponent = () => {
   );
 };
 
-export default RegisterComponent;
+export default Register;
