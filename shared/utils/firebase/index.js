@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
-
 import { getFirestore } from 'firebase/firestore';
+
+// import * as database from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -15,6 +16,9 @@ const firebaseConfig = {
 // Initialize Firebase
 initializeApp(firebaseConfig);
 
-export const database = getFirestore();
+export const db = getFirestore();
+// getDocs(collection(db, 'boats')).then((boats) => {
+//   console.log('got boats!', boats);
+// });
 
 export * from './createAccount';

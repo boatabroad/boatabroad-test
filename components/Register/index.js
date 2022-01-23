@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { createAccount } from 'utils/firebase';
+import { createAccount } from 'shared/utils/firebase';
 import { useRouter } from 'next/router';
+
 const RegisterComponent = () => {
   const router = useRouter();
   const [username, setUsername] = useState('');

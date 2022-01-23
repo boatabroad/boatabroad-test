@@ -1,5 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { collection, updateDoc, doc } from 'firebase/firestore';
 import stripe from 'api/utils/stripe';
+import { db } from 'shared/utils/firebase';
 
 const parseBody = (req: VercelRequest): Promise<string> =>
   new Promise((resolve) => {
@@ -33,4 +35,13 @@ export const getStripeEvent = async (
     res.status(200).send(`Webhook Error: ${err.message}`);
     return null;
   }
+};
+
+export const associateBoatWithUser = async (userId: string, boatId: string) => {
+  const boat = doc(collection(db, 'boats'), boatId);
+
+  return updateDoc(boat, {
+    rentedBy: userId,
+    processingPayment: false,
+  });
 };

@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import Stripe from 'stripe';
-import { getStripeEvent } from './utils';
+import { associateBoatWithUser, getStripeEvent } from './utils';
 
 export const createPaymentEvent = async (
   req: VercelRequest,
@@ -17,6 +17,7 @@ export const createPaymentEvent = async (
       // TODO update the boat with the user id
       console.log('userId', userId);
       console.log('boatId', boatId);
+      associateBoatWithUser(userId, boatId);
       break;
   }
 };
