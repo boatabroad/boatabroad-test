@@ -4,35 +4,18 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { ClimbingBoxLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
+import sweetAlert from 'sweetalert';
+import useUser from 'hooks/useUser';
 import style from './style.module.css';
-
-const CARD_OPTIONS = {
-  iconStyle: 'solid',
-  style: {
-    base: {
-      iconColor: '#c4f0ff',
-      color: '#fff',
-      fontWeight: 500,
-      fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-      fontSize: '16px',
-      fontSmoothing: 'antialiased',
-      ':-webkit-autofill': { color: '#fce883' },
-      '::placeholder': { color: '#87bbfd' },
-    },
-    invalid: {
-      iconColor: '#ffc7ee',
-      color: '#ffc7ee',
-    },
-  },
-};
+import { CARD_OPTIONS, SUCCESS_MESSAGE } from './constants';
 
 const PaymentForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
-  const [success, setSuccess] = useState(false);
+  const { user } = useUser();
   const [loading, setLoading] = useState(false);
-  const { boatId } = props;
+  const { boat } = props;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,59 +28,65 @@ const PaymentForm = (props) => {
     if (!error) {
       try {
         const { id } = paymentMethod;
+        props.onPaymentStart();
         const response = await axios.post('/api/payments', {
           id,
-          amount: 1000,
-          // TODO replace by real user id
-          userId: 'test-user',
-          boatId,
+          userId: user.uid,
+          boatId: boat.id,
+          amount: boat.price.amount,
+          currency: boat.price.currency,
         });
 
         if (response.status === 200) {
-          setSuccess(true);
-          setTimeout(() => {
-            router.push('/dashboard');
-          }, 4000);
+          props.onPaymentCompleted();
+          sweetAlert('Congratulations!', SUCCESS_MESSAGE, 'success').then(
+            () => {
+              router.push('/dashboard');
+            }
+          );
         }
       } catch (err) {
         console.log('there was a payment error', err);
+        const { response } = err;
+        if (response?.data?.error) {
+          sweetAlert('Payment error', response.data.error, 'error');
+        } else {
+          sweetAlert('Payment error', 'There was an unknown error', 'error');
+        }
       }
+      props.onPaymentEnd();
+    } else {
+      console.error('error', error);
     }
     setLoading(false);
   };
 
   return (
     <div className={style.paymentForm}>
-      {!success ? (
-        <form onSubmit={handleSubmit}>
-          <fieldset className={style.formGroup}>
-            <CardElement options={CARD_OPTIONS} />
-          </fieldset>
-          {loading ? (
-            <div className={style.loadingContainer}>
-              We are processing you payment...
-              <ClimbingBoxLoader />
-            </div>
-          ) : (
-            <button type="submit" className={style.payButton}>
-              Pay
-            </button>
-          )}
-        </form>
-      ) : (
-        <div>
-          <h2 className="message">
-            Congratulations! You have successfully rented this boat. It will be
-            added to your boat list once the payment succeeds.
-          </h2>
-        </div>
-      )}
+      <form onSubmit={handleSubmit}>
+        <fieldset className={style.formGroup}>
+          <CardElement options={CARD_OPTIONS} />
+        </fieldset>
+        {loading ? (
+          <div className={style.loadingContainer}>
+            We are processing your payment...
+            <ClimbingBoxLoader />
+          </div>
+        ) : (
+          <button type="submit" className={style.payButton}>
+            Pay ${boat.price.amount} {boat.price.currency}
+          </button>
+        )}
+      </form>
     </div>
   );
 };
 
 PaymentForm.propTypes = {
-  boatId: PropTypes.string,
+  boat: PropTypes.object,
+  onPaymentStart: PropTypes.func,
+  onPaymentEnd: PropTypes.func,
+  onPaymentCompleted: PropTypes.func,
 };
 
 export default PaymentForm;

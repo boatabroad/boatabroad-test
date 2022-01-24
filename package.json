@@ -16,6 +16,7 @@
     "axios": "^0.25.0",
     "date-fns": "^2.27.0",
     "firebase": "^9.6.3",
+    "firebase-admin": "^10.0.2",
     "geolib": "^3.3.3",
     "joi": "^17.5.0",
     "next": "latest",
@@ -25,6 +26,7 @@
     "react-map-gl": "^6.1.16",
     "react-spinners": "^0.11.0",
     "stripe": "^8.199.0",
+    "sweetalert": "^2.1.2",
     "tailwind-scrollbar-hide": "^1.1.6"
   },
   "devDependencies": {

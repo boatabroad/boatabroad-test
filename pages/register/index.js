@@ -1,7 +1,12 @@
-import RegisterComponent from 'components/Register';
+import Register from 'components/Register';
+import IfNotLoggedIn from 'components/IfNotLoggedIn';
 
-const index = () => {
-  return <RegisterComponent />;
+const RegisterPage = () => {
+  return (
+    <IfNotLoggedIn>
+      <Register />
+    </IfNotLoggedIn>
+  );
 };
 
-export default index;
+export default RegisterPage;

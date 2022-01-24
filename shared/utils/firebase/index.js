@@ -1,4 +1,3 @@
-// import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import firebase, { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
@@ -19,10 +18,6 @@ export default function initFirebase() {
   }
 }
 
-// export const db = getFirestore();
-// getDocs(collection(db, 'boats')).then((boats) => {
-//   console.log('got boats!', boats);
-// });
 const app = initializeApp(firebaseConfig);
 
 export * from './createAccount';

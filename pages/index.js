@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Banner from 'components/Banner';
 import Cards from 'components/Cards';
 import Footer from 'components/Footer';
@@ -9,11 +8,6 @@ import SmallCard from 'components/SmallCard';
 export default function Home({ exploreData, cardsData }) {
   return (
     <div className="">
-      <Head>
-        <title>Boatabroad - Boat Rentals</title>
-        <link rel="icon" href="/icon.svg" />
-      </Head>
-
       <Header />
       <Banner />
 

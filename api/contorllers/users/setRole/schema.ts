@@ -5,19 +5,21 @@ const validateSchema = (req: VercelRequest, res: VercelResponse) => {
   const validation = joi
     .object()
     .keys({
+      query: joi
+        .object()
+        .keys({
+          userId: joi.string().required(),
+        })
+        .required(),
       body: joi
         .object()
         .keys({
-          id: joi.string().required(),
-          userId: joi.string().required(),
-          boatId: joi.string().required(),
-          amount: joi.number().positive().required(),
-          currency: joi.string().required(),
+          role: joi.string().valid('tenant', 'owner').required(),
         })
         .required(),
     })
     .required()
-    .validate({ body: req.body });
+    .validate({ body: req.body, query: req.query });
 
   if (validation.error) {
     res.status(400).json({ errors: validation.error.details });

@@ -8,13 +8,21 @@ const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
 const StripeContainer = (props) => {
   return (
     <Elements stripe={stripePromise}>
-      <PaymentForm boatId={props.boatId} />
+      <PaymentForm
+        boat={props.boat}
+        onPaymentStart={props.onPaymentStart}
+        onPaymentEnd={props.onPaymentEnd}
+        onPaymentCompleted={props.onPaymentCompleted}
+      />
     </Elements>
   );
 };
 
 StripeContainer.propTypes = {
-  boatId: PropTypes.string,
+  boat: PropTypes.object,
+  onPaymentStart: PropTypes.func,
+  onPaymentEnd: PropTypes.func,
+  onPaymentCompleted: PropTypes.func,
 };
 
 export default StripeContainer;

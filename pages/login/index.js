@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import style from './style.module.css';
 
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth, provider } from 'shared/utils/firebase';
+import { logIn } from 'shared/utils/firebase/logIn';
 import { useRouter } from 'next/router';
 
 const Login = () => {
   const router = useRouter();
+  const [email] = useState('');
+  const [password] = useState('');
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    let email = e.target.elements.email?.value;
-    let password = e.target.elements.password?.value;
-
-    console.log(email, password);
+    logIn(email, password).then(() => {
+      router.push('/dashboard');
+    });
   };
 
   const googleLogin = async () => {
