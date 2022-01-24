@@ -1,7 +1,7 @@
-import { initializeApp } from 'firebase/app';
+// import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-
-// import * as database from 'firebase/database';
+import firebase, { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -13,12 +13,20 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID,
 };
 
-// Initialize Firebase
-initializeApp(firebaseConfig);
+export default function initFirebase() {
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+}
 
-export const db = getFirestore();
+// export const db = getFirestore();
 // getDocs(collection(db, 'boats')).then((boats) => {
 //   console.log('got boats!', boats);
 // });
+const app = initializeApp(firebaseConfig);
 
 export * from './createAccount';
+export const db = getFirestore(app);
+export const auth = getAuth();
+export const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: 'select_account' });
