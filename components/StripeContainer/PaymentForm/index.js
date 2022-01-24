@@ -28,6 +28,7 @@ const PaymentForm = (props) => {
     if (!error) {
       try {
         const { id } = paymentMethod;
+        props.onPaymentStart();
         const response = await axios.post('/api/payments', {
           id,
           userId: user.uid,
@@ -37,6 +38,7 @@ const PaymentForm = (props) => {
         });
 
         if (response.status === 200) {
+          props.onPaymentCompleted();
           sweetAlert('Congratulations!', SUCCESS_MESSAGE, 'success').then(
             () => {
               router.push('/dashboard');
@@ -52,6 +54,9 @@ const PaymentForm = (props) => {
           sweetAlert('Payment error', 'There was an unknown error', 'error');
         }
       }
+      props.onPaymentEnd();
+    } else {
+      console.error('error', error);
     }
     setLoading(false);
   };
@@ -64,7 +69,7 @@ const PaymentForm = (props) => {
         </fieldset>
         {loading ? (
           <div className={style.loadingContainer}>
-            We are processing you payment...
+            We are processing your payment...
             <ClimbingBoxLoader />
           </div>
         ) : (
@@ -79,6 +84,9 @@ const PaymentForm = (props) => {
 
 PaymentForm.propTypes = {
   boat: PropTypes.object,
+  onPaymentStart: PropTypes.func,
+  onPaymentEnd: PropTypes.func,
+  onPaymentCompleted: PropTypes.func,
 };
 
 export default PaymentForm;
