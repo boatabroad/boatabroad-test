@@ -14,9 +14,7 @@ export const createPaymentEvent = async (
     case 'payment_intent.succeeded':
       const object = event.data.object as Stripe.PaymentIntent;
       const { userId, boatId } = object.metadata;
-      // TODO update the boat with the user id
-      console.log('userId', userId);
-      console.log('boatId', boatId);
+      console.log(`user ${userId} paid for boat ${boatId}`);
       associateBoatWithUser(userId, boatId);
       break;
   }

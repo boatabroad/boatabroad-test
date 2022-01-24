@@ -9,7 +9,6 @@ const validateSchema = (req: VercelRequest, res: VercelResponse) => {
         .object()
         .keys({
           id: joi.string().required(),
-          amount: joi.number().positive().required(),
           userId: joi.string().required(),
           boatId: joi.string().required(),
         })

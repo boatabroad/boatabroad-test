@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { ClimbingBoxLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import style from './style.module.css';
+import useUser from 'hooks/useUser';
 
 const CARD_OPTIONS = {
   iconStyle: 'solid',
@@ -30,6 +31,7 @@ const PaymentForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
+  const user = useUser();
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const { boatId } = props;
@@ -47,9 +49,7 @@ const PaymentForm = (props) => {
         const { id } = paymentMethod;
         const response = await axios.post('/api/payments', {
           id,
-          amount: 1000,
-          // TODO replace by real user id
-          userId: 'test-user',
+          userId: user.uid,
           boatId,
         });
 

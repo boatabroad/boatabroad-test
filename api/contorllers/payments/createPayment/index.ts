@@ -14,7 +14,7 @@ export const createPayment = async (
   if (res.headersSent) {
     return;
   }
-  const { amount, id, userId, boatId } = req.body;
+  const { id, userId, boatId } = req.body;
   const boat = (await getDoc(doc(collection(db, 'boats'), boatId))).data();
   const validation = validateBoatRental(boat);
 
@@ -27,9 +27,9 @@ export const createPayment = async (
   try {
     await setProcessingPayment(boatId, true);
     await stripe.paymentIntents.create({
-      amount,
+      amount: boat.price.amount * 100,
       metadata: { userId, boatId },
-      currency: 'USD',
+      currency: boat.price.currency,
       description: 'Example payment',
       payment_method: id,
       confirm: true,
