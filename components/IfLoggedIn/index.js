@@ -3,12 +3,8 @@ import { useRouter } from 'next/router';
 import { ClimbingBoxLoader } from 'react-spinners';
 
 const IfLoggedIn = ({ children }) => {
-  const { user, loading, role } = useUser();
+  const { user, loading } = useUser();
   const router = useRouter();
-
-  console.log('user', user);
-  console.log('role', role);
-  console.log('loading', loading);
 
   if (loading) {
     return <ClimbingBoxLoader />;
