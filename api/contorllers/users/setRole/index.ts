@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import admin from 'shared/utils/firebase/admin';
+import admin from 'api/utils/firebase-admin';
 import validateSchema from './schema';
 
 const auth = admin.auth();
