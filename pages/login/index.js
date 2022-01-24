@@ -9,8 +9,8 @@ import { useRouter } from 'next/router';
 
 const Login = () => {
   const router = useRouter();
-  const [email] = useState('');
-  const [password] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -65,14 +65,16 @@ const Login = () => {
             <input
               type="email"
               className={style.input}
-              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Example@something.com"
             />
             <pre className={style.miniPre}>Password</pre>
             <input
               type="password"
               className={style.input}
-              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="* * * * * *"
             />
             <button className={style.button}>Login</button>
