@@ -30,13 +30,13 @@ export const validateBoatRental = (boat, amount, currency) => {
   if (boat.price.amount !== amount) {
     return {
       status: 409,
-      error: 'The amount is not correct.',
+      error: 'The price has been changed. Please refresh the page.',
     };
   }
   if (boat.price.currency !== currency) {
     return {
       status: 409,
-      error: 'The currency is not correct.',
+      error: 'The price has been changed. Please refresh the page.',
     };
   }
 
