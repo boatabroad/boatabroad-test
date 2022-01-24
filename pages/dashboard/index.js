@@ -1,7 +1,11 @@
-import React from 'react';
+import IfLoggedIn from 'components/IfLoggedIn';
 
-const index = () => {
-  return <div>hola</div>;
+const Dashboard = () => {
+  return (
+    <IfLoggedIn>
+      <div>hola</div>
+    </IfLoggedIn>
+  );
 };
 
-export default index;
+export default Dashboard;
