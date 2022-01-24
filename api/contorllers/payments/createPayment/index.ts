@@ -30,7 +30,7 @@ export const createPayment = async (
       amount: boat.price.amount * 100,
       metadata: { userId, boatId },
       currency: boat.price.currency,
-      description: 'Example payment',
+      description: `Rental of boat ${boatId} for $${boat.price.amount} ${boat.price.currency}`,
       payment_method: id,
       confirm: true,
     });

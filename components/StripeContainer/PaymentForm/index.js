@@ -34,7 +34,7 @@ const PaymentForm = (props) => {
   const user = useUser();
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { boatId } = props;
+  const { boat } = props;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,7 +50,7 @@ const PaymentForm = (props) => {
         const response = await axios.post('/api/payments', {
           id,
           userId: user.uid,
-          boatId,
+          boatId: boat.id,
         });
 
         if (response.status === 200) {
@@ -80,7 +80,7 @@ const PaymentForm = (props) => {
             </div>
           ) : (
             <button type="submit" className={style.payButton}>
-              Pay
+              Pay ${boat.price.amount} {boat.price.currency}
             </button>
           )}
         </form>
@@ -97,7 +97,7 @@ const PaymentForm = (props) => {
 };
 
 PaymentForm.propTypes = {
-  boatId: PropTypes.string,
+  boat: PropTypes.object,
 };
 
 export default PaymentForm;

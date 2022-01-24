@@ -18,7 +18,7 @@ const PaymentPage = () => {
       return;
     }
     getDoc(doc(collection(db, 'boats'), boatId)).then((givenBoat) => {
-      const data = givenBoat.data();
+      const data = { id: givenBoat.id, ...givenBoat.data() };
       const validation = validateBoatRental(data);
       setBoat(data);
       if (validation.error) {
@@ -43,7 +43,7 @@ const PaymentPage = () => {
   return (
     <>
       <h1 className={style.title}>Rent this boat</h1>
-      <StripeContainer boatId={boatId} />
+      <StripeContainer boat={boat} />
     </>
   );
 };
