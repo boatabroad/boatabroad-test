@@ -4,28 +4,9 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { ClimbingBoxLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
-import style from './style.module.css';
 import useUser from 'hooks/useUser';
-
-const CARD_OPTIONS = {
-  iconStyle: 'solid',
-  style: {
-    base: {
-      iconColor: '#c4f0ff',
-      color: '#fff',
-      fontWeight: 500,
-      fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-      fontSize: '16px',
-      fontSmoothing: 'antialiased',
-      ':-webkit-autofill': { color: '#fce883' },
-      '::placeholder': { color: '#87bbfd' },
-    },
-    invalid: {
-      iconColor: '#ffc7ee',
-      color: '#ffc7ee',
-    },
-  },
-};
+import style from './style.module.css';
+import { CARD_OPTIONS } from './constants';
 
 const PaymentForm = (props) => {
   const stripe = useStripe();
