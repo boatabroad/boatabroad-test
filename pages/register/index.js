@@ -1,12 +1,12 @@
 import Register from 'components/Register';
-import useUser from 'hooks/useUser';
+import IfNotLoggedIn from 'components/IfNotLoggedIn';
 
 const RegisterPage = () => {
-  const user = useUser();
-
-  console.log('user', user);
-
-  return <Register />;
+  return (
+    <IfNotLoggedIn>
+      <Register />
+    </IfNotLoggedIn>
+  );
 };
 
 export default RegisterPage;

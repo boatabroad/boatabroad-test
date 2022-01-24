@@ -31,7 +31,7 @@ const PaymentForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
-  const user = useUser();
+  const { user } = useUser();
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const { boat } = props;

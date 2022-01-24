@@ -6,6 +6,7 @@ import { db } from 'shared/utils/firebase';
 import { ClimbingBoxLoader } from 'react-spinners';
 import style from './style.module.css';
 import { validateBoatRental } from 'shared/utils/boat/validateBoatRental';
+import IfLoggedIn from 'components/IfLoggedIn';
 
 const PaymentPage = () => {
   const router = useRouter();
@@ -28,23 +29,29 @@ const PaymentPage = () => {
   }, [boatId]);
 
   if (validationError) {
-    return <div className={style.loadingContainer}>{validationError}</div>;
+    return (
+      <IfLoggedIn>
+        <div className={style.loadingContainer}>{validationError}</div>
+      </IfLoggedIn>
+    );
   }
 
   if (!boat) {
     return (
-      <div className={style.loadingContainer}>
-        <ClimbingBoxLoader />
-        We're searching for the boat...
-      </div>
+      <IfLoggedIn>
+        <div className={style.loadingContainer}>
+          <ClimbingBoxLoader />
+          We're searching for the boat...
+        </div>
+      </IfLoggedIn>
     );
   }
 
   return (
-    <>
+    <IfLoggedIn>
       <h1 className={style.title}>Rent this boat</h1>
       <StripeContainer boat={boat} />
-    </>
+    </IfLoggedIn>
   );
 };
 
