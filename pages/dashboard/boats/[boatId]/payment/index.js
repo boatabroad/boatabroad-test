@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import StripeContainer from 'components/StripeContainer';
 import { useRouter } from 'next/router';
-import { collection, doc, getDoc } from 'firebase/firestore';
+import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { ClimbingBoxLoader } from 'react-spinners';
 import sweetAlert from 'sweetalert';
 import { db } from 'shared/utils/firebase';
@@ -19,21 +19,28 @@ const PaymentPage = () => {
     if (!boatId) {
       return;
     }
-    getDoc(doc(collection(db, 'boats'), boatId)).then((givenBoat) => {
-      const data = { id: givenBoat.id, ...givenBoat.data() };
-      const validation = validateBoatRental(
-        data,
-        data.price.amount,
-        data.price.currency
-      );
-      if (validation.error) {
-        setError(true);
-        sweetAlert('Validation error', validation.error, 'error').then(() => {
-          router.push('/dashboard');
-        });
+    const unsubscribe = onSnapshot(
+      doc(collection(db, 'boats'), boatId),
+      (givenBoat) => {
+        const data = { id: givenBoat.id, ...givenBoat.data() };
+        const validation = validateBoatRental(
+          data,
+          data.price.amount,
+          data.price.currency
+        );
+        if (validation.error) {
+          setError(true);
+          sweetAlert('Validation error', validation.error, 'error').then(() => {
+            router.push('/dashboard');
+          });
+        }
+        setBoat(data);
       }
-      setBoat(data);
-    });
+    );
+
+    return () => {
+      unsubscribe();
+    };
   }, [boatId]);
 
   if (error) {
