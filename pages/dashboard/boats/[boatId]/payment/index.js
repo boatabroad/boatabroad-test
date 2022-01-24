@@ -20,7 +20,11 @@ const PaymentPage = () => {
     }
     getDoc(doc(collection(db, 'boats'), boatId)).then((givenBoat) => {
       const data = { id: givenBoat.id, ...givenBoat.data() };
-      const validation = validateBoatRental(data);
+      const validation = validateBoatRental(
+        data,
+        data.price.amount,
+        data.price.currency
+      );
       if (validation.error) {
         setValidationError(validation.error);
       }

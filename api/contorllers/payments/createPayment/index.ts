@@ -14,9 +14,9 @@ export const createPayment = async (
   if (res.headersSent) {
     return;
   }
-  const { id, userId, boatId } = req.body;
+  const { id, userId, boatId, amount, currency } = req.body;
   const boat = (await getDoc(doc(collection(db, 'boats'), boatId))).data();
-  const validation = validateBoatRental(boat);
+  const validation = validateBoatRental(boat, amount, currency);
 
   if (validation.error) {
     return res.status(validation.status).json({

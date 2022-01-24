@@ -32,6 +32,8 @@ const PaymentForm = (props) => {
           id,
           userId: user.uid,
           boatId: boat.id,
+          amount: boat.price.amount,
+          currency: boat.price.currency,
         });
 
         if (response.status === 200) {

@@ -1,4 +1,4 @@
-export const validateBoatRental = (boat) => {
+export const validateBoatRental = (boat, amount, currency) => {
   if (!boat) {
     return {
       status: 404,
@@ -24,6 +24,19 @@ export const validateBoatRental = (boat) => {
     return {
       status: 409,
       error: 'Someone else is renting this boat at this moment.',
+    };
+  }
+
+  if (boat.price.amount !== amount) {
+    return {
+      status: 409,
+      error: 'The amount is not correct.',
+    };
+  }
+  if (boat.price.currency !== currency) {
+    return {
+      status: 409,
+      error: 'The currency is not correct.',
     };
   }
 
