@@ -9,14 +9,14 @@ export const validateBoatRental = (boat, amount, currency) => {
   if (!boat.published) {
     return {
       status: 409,
-      error: 'The boat is not published yet.',
+      error: 'This boat has not been published yet.',
     };
   }
 
   if (boat.rentedBy) {
     return {
       status: 409,
-      error: 'The boat is already rented by someone else.',
+      error: 'This boat is already rented.',
     };
   }
 
@@ -27,16 +27,11 @@ export const validateBoatRental = (boat, amount, currency) => {
     };
   }
 
-  if (boat.price.amount !== amount) {
+  if (boat.price.amount !== amount || boat.price.currency !== currency) {
     return {
       status: 409,
-      error: 'The price has been changed. Please refresh the page.',
-    };
-  }
-  if (boat.price.currency !== currency) {
-    return {
-      status: 409,
-      error: 'The price has been changed. Please refresh the page.',
+      error:
+        'The price has been changed. Please refresh the page and try again.',
     };
   }
 

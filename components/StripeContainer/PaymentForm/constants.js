@@ -17,3 +17,6 @@ export const CARD_OPTIONS = {
     },
   },
 };
+
+export const SUCCESS_MESSAGE =
+  'You have successfully rented this boat. It will be added to your boat list once the payment is confirmed.';

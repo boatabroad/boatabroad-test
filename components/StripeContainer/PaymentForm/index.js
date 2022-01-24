@@ -4,16 +4,16 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { ClimbingBoxLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
+import sweetAlert from 'sweetalert';
 import useUser from 'hooks/useUser';
 import style from './style.module.css';
-import { CARD_OPTIONS } from './constants';
+import { CARD_OPTIONS, SUCCESS_MESSAGE } from './constants';
 
 const PaymentForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
   const { user } = useUser();
-  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const { boat } = props;
 
@@ -37,13 +37,20 @@ const PaymentForm = (props) => {
         });
 
         if (response.status === 200) {
-          setSuccess(true);
-          setTimeout(() => {
-            router.push('/dashboard');
-          }, 4000);
+          sweetAlert('Congratulations!', SUCCESS_MESSAGE, 'success').then(
+            () => {
+              router.push('/dashboard');
+            }
+          );
         }
       } catch (err) {
         console.log('there was a payment error', err);
+        const { response } = err;
+        if (response?.data?.error) {
+          sweetAlert('Payment error', response.data.error, 'error');
+        } else {
+          sweetAlert('Payment error', 'There was an unknown error', 'error');
+        }
       }
     }
     setLoading(false);
@@ -51,30 +58,21 @@ const PaymentForm = (props) => {
 
   return (
     <div className={style.paymentForm}>
-      {!success ? (
-        <form onSubmit={handleSubmit}>
-          <fieldset className={style.formGroup}>
-            <CardElement options={CARD_OPTIONS} />
-          </fieldset>
-          {loading ? (
-            <div className={style.loadingContainer}>
-              We are processing you payment...
-              <ClimbingBoxLoader />
-            </div>
-          ) : (
-            <button type="submit" className={style.payButton}>
-              Pay ${boat.price.amount} {boat.price.currency}
-            </button>
-          )}
-        </form>
-      ) : (
-        <div>
-          <h2 className="message">
-            Congratulations! You have successfully rented this boat. It will be
-            added to your boat list once the payment succeeds.
-          </h2>
-        </div>
-      )}
+      <form onSubmit={handleSubmit}>
+        <fieldset className={style.formGroup}>
+          <CardElement options={CARD_OPTIONS} />
+        </fieldset>
+        {loading ? (
+          <div className={style.loadingContainer}>
+            We are processing you payment...
+            <ClimbingBoxLoader />
+          </div>
+        ) : (
+          <button type="submit" className={style.payButton}>
+            Pay ${boat.price.amount} {boat.price.currency}
+          </button>
+        )}
+      </form>
     </div>
   );
 };

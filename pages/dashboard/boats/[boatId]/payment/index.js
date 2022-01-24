@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import StripeContainer from 'components/StripeContainer';
 import { useRouter } from 'next/router';
 import { collection, doc, getDoc } from 'firebase/firestore';
-import { db } from 'shared/utils/firebase';
 import { ClimbingBoxLoader } from 'react-spinners';
+import sweetAlert from 'sweetalert';
+import { db } from 'shared/utils/firebase';
 import style from './style.module.css';
 import { validateBoatRental } from 'shared/utils/boat/validateBoatRental';
 import IfLoggedIn from 'components/IfLoggedIn';
@@ -12,7 +13,7 @@ const PaymentPage = () => {
   const router = useRouter();
   const { boatId } = router.query;
   const [boat, setBoat] = useState(null);
-  const [validationError, setValidationError] = useState(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (!boatId) {
@@ -26,18 +27,17 @@ const PaymentPage = () => {
         data.price.currency
       );
       if (validation.error) {
-        setValidationError(validation.error);
+        setError(true);
+        sweetAlert('Validation error', validation.error, 'error').then(() => {
+          router.push('/dashboard');
+        });
       }
       setBoat(data);
     });
   }, [boatId]);
 
-  if (validationError) {
-    return (
-      <IfLoggedIn>
-        <div className={style.loadingContainer}>{validationError}</div>
-      </IfLoggedIn>
-    );
+  if (error) {
+    return <div />;
   }
 
   if (!boat) {
