@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-// import firebase from 'shared/utils/firebase';
-
-const auth = getAuth();
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from 'shared/utils/firebase';
 
 const useUser = () => {
   const [data, setData] = useState({ loading: true, user: null, role: null });
