@@ -1,0 +1,37 @@
+.newRentPost {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+  padding: 2em;
+}
+.uploadImg {
+  width: 100%;
+  height: 150px;
+  background: white;
+  border: 1px silver dashed;
+  border-radius: 10px;
+  margin-bottom: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: grey;
+  font-weight: bold;
+  font-size: 22px;
+}
+.uploadText {
+  color: #1c1c1c;
+  font-size: 24px;
+  font-weight: bold;
+}
+.title,
+.subtitle,
+.description {
+  width: 100%;
+  height: 100px;
+  background: white;
+  border: 1px silver dashed;
+  border-radius: 10px;
+  margin-bottom: 2em;
+}

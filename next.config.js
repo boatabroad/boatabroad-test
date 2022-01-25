@@ -10,7 +10,9 @@ module.exports = {
       'jsonkeeper.com',
       'boatabroad.com',
       'drive.google.com',
+      'lh3.googleusercontent.com',
     ],
+    formats: ['image/avif', 'image/webp'],
   },
   env: {
     STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY,

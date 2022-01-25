@@ -1,0 +1,38 @@
+.userPictureNav {
+  width: 250px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1em;
+}
+.pictureCircular {
+  width: 45px;
+  height: 40px;
+  border-radius: 100%;
+  background: #ebebeb;
+  display: flex;
+}
+.nonGrey {
+  width: 45px;
+  height: 40px;
+  border-radius: 100%;
+  display: flex;
+}
+.text {
+  padding-left: 1em;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-flow: column;
+  flex: 3;
+  border-right: 2px solid grey;
+}
+.paragraph {
+  color: grey;
+  font-weight: bold;
+  font-size: 12px;
+}
+.h4 {
+  color: black;
+  font-weight: bold;
+}
