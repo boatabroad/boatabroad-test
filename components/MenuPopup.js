@@ -19,12 +19,19 @@ export const MenuPopup = () => {
         {loading ? (
           'Loading...'
         ) : user ? (
-          <li
-            className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white"
-            onClick={handleLogOut}
-          >
-            <div className="cursor-pointer">Log out</div>
-          </li>
+          <>
+            <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
+              <Link href="/dashboard">
+                <a className="cursor-pointer">Dashboard</a>
+              </Link>
+            </li>
+            <li
+              className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white"
+              onClick={handleLogOut}
+            >
+              <div className="cursor-pointer">Log out</div>
+            </li>
+          </>
         ) : (
           <>
             <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
