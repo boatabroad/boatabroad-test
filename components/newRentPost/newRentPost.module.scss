@@ -4,7 +4,7 @@
   display: flex;
   flex-flow: column;
   flex: 1;
-  padding: 2em;
+  padding: 3em 2em 2em 3em;
 }
 .uploadImg {
   width: 100%;
@@ -21,8 +21,12 @@
   font-size: 22px;
 }
 .uploadText {
-  color: #1c1c1c;
+  color: #141414;
   font-size: 24px;
+  font-weight: bold;
+}
+.titleText {
+  color: #141414;
   font-weight: bold;
 }
 .title,
@@ -34,4 +38,7 @@
   border: 1px silver dashed;
   border-radius: 10px;
   margin-bottom: 2em;
+  outline: none;
+  resize: none;
+  padding: 0.5em;
 }

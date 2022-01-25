@@ -1,20 +1,20 @@
 .userPictureNav {
-  width: 250px;
-  height: 100%;
+  width: 180px;
   display: flex;
   align-items: center;
-  padding: 1em;
+  padding-left: 1em;
+  // background: #000;
 }
 .pictureCircular {
-  width: 45px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 100%;
   background: #ebebeb;
   display: flex;
 }
 .nonGrey {
-  width: 45px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 100%;
   display: flex;
 }

@@ -7,8 +7,8 @@ const Logo = () => {
     <Image
       src="/images/logoWhite.png"
       alt="Picture of the author"
-      width={40}
-      height={40}
+      width={80}
+      height={80}
       className={style.logo}
     />
   );
