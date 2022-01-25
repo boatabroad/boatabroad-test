@@ -16,14 +16,16 @@ const UserPictureNav = () => {
 
   return (
     <div className={style.userPictureNav}>
-      {userPic && (
+      {userPic ? (
         <Image
           src={userPic}
           alt="Picture of the author"
           width={40}
           height={40}
-          className={userPic ? style.nonGrey : style.pictureCircular}
+          className={style.nonGrey}
         />
+      ) : (
+        <div className={style.pictureCircular}></div>
       )}
 
       <div className={style.text}>
