@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 import { db } from 'shared/utils/firebase';
 import stripe from 'api/utils/stripe';
 import validateSchema from './schema';
-import { createBoatRental, setProcessingPayment } from './utils';
+import { createBoatRental, cancelBoatRental } from './utils';
 import { validateBoatRental } from 'shared/utils/boat/validateBoatRental';
 
 export const createPayment = async (
@@ -17,7 +17,7 @@ export const createPayment = async (
   }
   const { id, userId, boatId, amount, currency, date } = req.body;
   const boatRentalId = uuid();
-  let boat = await getDoc(doc(collection(db, 'boats'), boatId));
+  let boat: any = await getDoc(doc(collection(db, 'boats'), boatId));
   boat = { id: boat.id, ...boat.data() };
   const validation = await validateBoatRental(
     boat,
@@ -66,6 +66,6 @@ export const createPayment = async (
   } catch (error) {
     console.log('error creating payment', error);
     res.status(error.statusCode || 500).json({ error: error.message });
-    await setProcessingPayment(boatId, false);
+    await cancelBoatRental(boatId, boatRentalId);
   }
 };

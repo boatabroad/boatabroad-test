@@ -1,12 +1,13 @@
-import { collection, doc, setDoc, updateDoc } from 'firebase/firestore';
+import { deleteDoc, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from 'shared/utils/firebase';
 
-export const setProcessingPayment = async (boatId: string, value: boolean) => {
-  const boat = doc(collection(db, 'boats'), boatId);
+export const cancelBoatRental = async (
+  boatId: string,
+  boatRentalId: string
+) => {
+  const boatRental = doc(db, `boats/${boatId}/rentals`, boatRentalId);
 
-  return updateDoc(boat, {
-    processingPayment: value,
-  });
+  return deleteDoc(boatRental);
 };
 
 export const createBoatRental = async (

@@ -34,7 +34,7 @@ const PaymentForm = (props) => {
           userId: user.uid,
           boatId: boat.id,
           // TODO add the real date here
-          date: '2022-02-02',
+          date: '2022-02-04',
           amount: boat.price.amount,
           currency: boat.price.currency,
         });
