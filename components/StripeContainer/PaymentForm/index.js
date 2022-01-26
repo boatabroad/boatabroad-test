@@ -33,6 +33,8 @@ const PaymentForm = (props) => {
           id,
           userId: user.uid,
           boatId: boat.id,
+          // TODO add the real date here
+          date: '2022-02-02',
           amount: boat.price.amount,
           currency: boat.price.currency,
         });
@@ -51,7 +53,11 @@ const PaymentForm = (props) => {
         if (response?.data?.error) {
           sweetAlert('Payment error', response.data.error, 'error');
         } else {
-          sweetAlert('Payment error', 'There was an unknown error', 'error');
+          sweetAlert(
+            'Payment error',
+            "There was an unknown error, but we're working on it.",
+            'error'
+          );
         }
       }
       props.onPaymentEnd();

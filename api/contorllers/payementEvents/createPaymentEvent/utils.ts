@@ -37,11 +37,13 @@ export const getStripeEvent = async (
   }
 };
 
-export const associateBoatWithUser = async (userId: string, boatId: string) => {
-  const boat = doc(collection(db, 'boats'), boatId);
+export const associateBoatRentalWithUser = async (
+  boatId: string,
+  boatRentalId: string
+) => {
+  const boatRentalDoc = doc(db, 'boats', boatId, 'rentals', boatRentalId);
 
-  return updateDoc(boat, {
-    rentedBy: userId,
+  return updateDoc(boatRentalDoc, {
     processingPayment: false,
   });
 };

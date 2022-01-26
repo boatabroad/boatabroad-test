@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import Stripe from 'stripe';
-import { associateBoatWithUser, getStripeEvent } from './utils';
+import { associateBoatRentalWithUser, getStripeEvent } from './utils';
 
 export const createPaymentEvent = async (
   req: VercelRequest,
@@ -13,9 +13,12 @@ export const createPaymentEvent = async (
   switch (event.type) {
     case 'payment_intent.succeeded':
       const object = event.data.object as Stripe.PaymentIntent;
-      const { userId, boatId } = object.metadata;
+      const { userId, boatId, boatRentalId } = object.metadata;
       console.log(`user ${userId} paid for boat ${boatId}`);
-      associateBoatWithUser(userId, boatId);
+
+      associateBoatRentalWithUser(boatId, boatRentalId).catch((error) => {
+        console.error('Error while associating boat rental with user:', error);
+      });
       break;
   }
 };

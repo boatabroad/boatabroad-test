@@ -30,7 +30,7 @@ const PaymentPage = () => {
     }
     const unsubscribe = onSnapshot(
       doc(collection(db, 'boats'), boatId),
-      (givenBoat) => {
+      async (givenBoat) => {
         if (payingRef.current || paidRef.current) {
           return;
         }
@@ -48,10 +48,12 @@ const PaymentPage = () => {
           );
         }
 
-        const validation = validateBoatRental(
+        const validation = await validateBoatRental(
           data,
           data.price.amount,
-          data.price.currency
+          data.price.currency,
+          null,
+          false
         );
         if (validation.error) {
           setError(true);

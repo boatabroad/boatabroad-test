@@ -1,4 +1,30 @@
-export const validateBoatRental = (boat, amount, currency) => {
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from 'shared/utils/firebase';
+
+const boatRentalValidation = async (boat, date) => {
+  const boatRentalsQuery = query(
+    collection(db, `boats/${boat.id}/rentals`),
+    where('date', '==', date)
+  );
+  const boatRentals = await getDocs(boatRentalsQuery);
+
+  if (!boatRentals.docs.length) {
+    return {};
+  }
+
+  return {
+    status: 409,
+    error: 'This boat is already rented on the selected date.',
+  };
+};
+
+export const validateBoatRental = async (
+  boat,
+  amount,
+  currency,
+  date,
+  validateRental
+) => {
   if (!boat) {
     return {
       status: 404,
@@ -13,26 +39,16 @@ export const validateBoatRental = (boat, amount, currency) => {
     };
   }
 
-  if (boat.rentedBy) {
-    return {
-      status: 409,
-      error: 'This boat is already rented.',
-    };
-  }
-
-  if (boat.processingPayment) {
-    return {
-      status: 409,
-      error: 'Someone else is renting this boat at this moment.',
-    };
-  }
-
   if (boat.price.amount !== amount || boat.price.currency !== currency) {
     return {
       status: 409,
       error:
         'The price has been changed. Please refresh the page and try again.',
     };
+  }
+
+  if (validateRental) {
+    return boatRentalValidation(boat, date);
   }
 
   return {};
