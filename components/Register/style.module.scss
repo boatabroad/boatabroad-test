@@ -1,0 +1,94 @@
+@mixin flexCenter {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  @include flexCenter();
+  flex-flow: column;
+  flex: 1;
+  background: #f9f9f9;
+}
+.h1Text {
+  color: black;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+.form {
+  width: 450px;
+  height: 450px;
+  display: flex;
+  flex-flow: column;
+  border-radius: 13px;
+  padding: 1.5em;
+  background: white;
+  box-shadow: 0.2em 0.2em 0.5em silver;
+}
+.mid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  border-radius: 13px;
+}
+.cameraPick {
+  width: 100%;
+  height: 100%;
+  @include flexCenter();
+  flex: 1;
+  cursor: pointer;
+  background: #f9f9f9;
+}
+.boxForm {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  flex: 1;
+  padding-right: 1em;
+}
+.miniPre {
+  font-size: 0.7em;
+}
+.input {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 1em;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #ebebeb;
+}
+.h4Text {
+  width: 100%;
+  text-align: center;
+  margin: 0.5em 0;
+}
+.googleLogin {
+  width: 100%;
+  height: 7 0px;
+  @include flexCenter();
+  cursor: pointer;
+  border: 1px solid silver;
+  border-radius: 7px;
+  padding: 7px 0;
+}
+.googleIcon {
+  width: 20px;
+  height: 20px;
+}
+.googleText {
+  margin-left: 1em;
+}
+.button {
+  width: 100%;
+  padding: 7px 0;
+  background: #00bfc1;
+  color: white;
+  font-weight: bold;
+  border-radius: 7px;
+  margin-top: 2em;
+}

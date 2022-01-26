@@ -1,18 +1,14 @@
 import IfLoggedIn from 'components/IfLoggedIn';
-import style from './dashboard.module.scss';
 
-import NavBar from 'components/navBar';
-import LateralMenu from 'components/lateralMenu';
 import NewRentPost from 'components/newRentPost';
+import OwnerLayout from 'components/layout/ownerLayout';
 
 const Dashboard = () => {
   return (
     <IfLoggedIn>
-      <div className={style.container}>
-        <NavBar />
-        <LateralMenu />
+      <OwnerLayout>
         <NewRentPost />
-      </div>
+      </OwnerLayout>
     </IfLoggedIn>
   );
 };

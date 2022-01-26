@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import style from './style.module.css';
+import style from './style.module.scss';
 
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth, provider } from 'shared/utils/firebase';

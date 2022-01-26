@@ -1,25 +1,102 @@
 import React from 'react';
+import Link from 'next/link';
 import style from './lateralMenu.module.scss';
+import { useRouter } from 'next/router';
+
+const sharePath = [
+  {
+    name: 'Rent new Boat',
+    href: '/dashboard',
+  },
+  {
+    name: 'My Boats',
+    href: '/myBoats',
+  },
+  {
+    name: 'Insight',
+    href: '/insight',
+  },
+];
+
+const SupportPath = [
+  {
+    name: 'Messages',
+    href: '/messages',
+  },
+  {
+    name: 'Invoices',
+    href: '/invoices',
+  },
+];
+
+const myAccountPath = [
+  {
+    name: 'My profile',
+    href: '/myProfile',
+  },
+  {
+    name: 'Log out',
+    href: '/logOut',
+  },
+];
 
 const LateralMenu = () => {
+  const router = useRouter();
+  const { pathname } = router;
+
   return (
     <div className={style.lateralMenu}>
       <h3 className={style.title}>Share</h3>
-      <p className={style.paragraph}>My boats</p>
-      <p className={style.paragraph}>Rent new Boat</p>
-      <p className={style.paragraph}>Insight</p>
+      {sharePath.map((item, index) => {
+        return (
+          <Link href={item.href} key={index}>
+            <p
+              style={{
+                color: pathname === item.href ? '#00bfc1' : 'grey',
+                cursor: 'pointer',
+              }}
+            >
+              {item.name}
+            </p>
+          </Link>
+        );
+      })}
       <br />
       <br />
 
       <h3 className={style.title}>Support</h3>
-      <p className={style.paragraph}>Messages</p>
-      <p className={style.paragraph}>Invoices</p>
+      {SupportPath.map((item, index) => {
+        return (
+          <Link href={item.href} key={index}>
+            <p
+              style={{
+                color: pathname === item.href ? '#00bfc1' : 'grey',
+                cursor: 'pointer',
+              }}
+            >
+              {item.name}
+            </p>
+          </Link>
+        );
+      })}
       <br />
       <br />
 
       <h3 className={style.title}>My account</h3>
-      <p className={style.paragraph}>My profile</p>
-      <p className={style.paragraph}>Log out</p>
+      {myAccountPath.map((item, index) => {
+        return (
+          <Link href={item.href} key={index}>
+            <p
+              style={{
+                color: pathname === item.href ? '#00bfc1' : 'grey',
+                cursor: 'pointer',
+              }}
+            >
+              {item.name}
+            </p>
+          </Link>
+        );
+      })}
     </div>
   );
 };

@@ -20,8 +20,8 @@ const UserPictureNav = () => {
         <Image
           src={userPic}
           alt="Picture of the author"
-          width={40}
-          height={40}
+          width={60}
+          height={60}
           className={style.nonGrey}
         />
       ) : (
