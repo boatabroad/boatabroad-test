@@ -71,21 +71,19 @@ const Login = () => {
         <h1 className={style.h1Text}>Welcome to BoataBroad</h1>
         <form onSubmit={handleFormSubmit} className={style.form}>
           <div className={style.mid}>
-            <pre className={style.miniPre}>Email</pre>
             <input
               type="email"
               className={style.input}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Example@something.com"
+              placeholder="Email"
             />
-            <pre className={style.miniPre}>Password</pre>
             <input
               type="password"
               className={style.input}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="* * * * * *"
+              placeholder="Password"
             />
             <button className={style.button}>Login</button>
             <h4 className={style.h4Text}>Or</h4>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const H1 = ({ text, color }) => {
+const H1 = ({ text, color, size }) => {
   return (
     <h1
       style={{
@@ -8,6 +8,7 @@ const H1 = ({ text, color }) => {
         width: '100%',
         fontWeight: 'bold',
         textAlign: 'center',
+        fontSize: size,
       }}
     >
       {text}

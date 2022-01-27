@@ -172,8 +172,8 @@ const Register = () => {
     // </div>
     <div className={style.container}>
       <div className={style.left}>
-        {/* <Logo size={40} /> */}
-        {/* <H1 color="#00bfc1" text="Welcome to BoataBroad" /> */}
+        <Logo size={40} src="/images/logoWhite.png" background={'red'} />
+        {/* <H1 color="#00bfc1" text="Welcome to BoataBroad" size={}/> */}
         <H1 color="white" text="Are you Owner?" />
         <p>
           “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

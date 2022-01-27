@@ -4,6 +4,12 @@
   z-index: 1000;
   display: flex;
   align-items: center;
-  // background: white;
-  background: pink;
+  background: white;
+}
+.linkText {
+  display: flex;
+  font-weight: bold;
+  h1 {
+    margin-left: 1em;
+  }
 }

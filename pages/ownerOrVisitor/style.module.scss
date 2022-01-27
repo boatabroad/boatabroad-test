@@ -1,0 +1,109 @@
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  @include flexCenter();
+  width: 100vw;
+  height: 100vh;
+  flex-wrap: wrap;
+}
+.left {
+  width: 50vw;
+  height: 100vh;
+  background-image: url('https://boatabroad.com/wp-content/uploads/2021/12/alina-kacharho-86wR5GZJZdQ-unsplash.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1em 1em 3em 1em;
+}
+.right {
+  width: 50vw;
+  height: 100vh;
+  background-image: url('https://images.pexels.com/photos/4091042/pexels-photo-4091042.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  padding: 3em 1em 1em 1em;
+}
+.textBox {
+  width: 70%;
+  display: flex;
+  flex-flow: column;
+  color: white;
+  h1 {
+    font-weight: bold;
+    font-size: 30px;
+  }
+  p {
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  .button {
+    border: 2px solid white;
+    border-radius: 15px;
+    color: white;
+    width: 100px;
+    padding: 0.2em 0;
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    flex-flow: column;
+  }
+  .left,
+  .right {
+    width: 100vw;
+    height: 50vh;
+  }
+  .left {
+    padding: 1em;
+  }
+  .right {
+    padding: 1em;
+  }
+  .textBox {
+    width: 70%;
+    display: flex;
+    flex-flow: column;
+    color: white;
+    h1 {
+      font-weight: bold;
+      font-size: 20px;
+    }
+    p {
+      font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .button {
+      border: 2px solid white;
+      border-radius: 15px;
+      color: white;
+      width: 100px;
+      padding: 0.2em 0;
+      font-weight: bold;
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .textBox {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .textBox {
+    width: 100%;
+  }
+}
