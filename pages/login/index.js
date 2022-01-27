@@ -6,6 +6,7 @@ import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth, provider } from 'shared/utils/firebase';
 import { logIn } from 'shared/utils/firebase/logIn';
 import { useRouter } from 'next/router';
+import GoogleButton from 'components/googleButton';
 
 const Login = () => {
   const router = useRouter();
@@ -86,15 +87,13 @@ const Login = () => {
               placeholder="Password"
             />
             <button className={style.button}>Login</button>
-            <h4 className={style.h4Text}>Or</h4>
-            <div className={style.googleLogin} onClick={googleLogin}>
-              <img
-                className={style.googleIcon}
-                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                alt="google button"
-              />
-              <p className={style.googleText}>Continue with Google</p>
+            <div className={style.h4Text}>
+              <hr />
+              <h4>or</h4>
+              <hr />
             </div>
+
+            <GoogleButton onclick={googleLogin} />
           </div>
           <div className={style.bottom}>
             <Link href="/register">
