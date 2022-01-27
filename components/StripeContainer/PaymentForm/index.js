@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { ClimbingBoxLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import sweetAlert from 'sweetalert';
+import moment from 'moment-timezone';
 import useUser from 'hooks/useUser';
 import style from './style.module.css';
 import { CARD_OPTIONS, SUCCESS_MESSAGE } from './constants';
@@ -33,8 +34,9 @@ const PaymentForm = (props) => {
           id,
           userId: user.uid,
           boatId: boat.id,
-          // TODO add the real date here
-          date: '2022-02-04',
+          // TODO add the real start and end dates here
+          startDate: moment('2022-02-01T19:00:00Z').tz('UTC').format(),
+          endDate: moment('2022-02-01T22:00:00Z').tz('UTC').format(),
           amount: boat.price.amount,
           currency: boat.price.currency,
         });

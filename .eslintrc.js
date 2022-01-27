@@ -23,5 +23,6 @@ module.exports = {
     'no-prototype-builtins': 'off',
     'no-redeclare': 'error',
     'react/no-unescaped-entities': 'off',
+    eqeqeq: 'error',
   },
 };

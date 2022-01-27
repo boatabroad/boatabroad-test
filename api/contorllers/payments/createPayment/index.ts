@@ -15,7 +15,7 @@ export const createPayment = async (
   if (res.headersSent) {
     return;
   }
-  const { id, userId, boatId, amount, currency, date } = req.body;
+  const { id, userId, boatId, amount, currency, startDate, endDate } = req.body;
   const boatRentalId = uuid();
   let boat: any = await getDoc(doc(collection(db, 'boats'), boatId));
   boat = { id: boat.id, ...boat.data() };
@@ -23,7 +23,8 @@ export const createPayment = async (
     boat,
     amount,
     currency,
-    date,
+    startDate,
+    endDate,
     true
   );
 
@@ -40,7 +41,8 @@ export const createPayment = async (
       userId,
       amount,
       currency,
-      date
+      startDate,
+      endDate
     );
   } catch (error) {
     return res.status(500).json({

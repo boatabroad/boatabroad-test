@@ -1,4 +1,5 @@
-import { deleteDoc, doc, setDoc, updateDoc } from 'firebase/firestore';
+import { deleteDoc, doc, setDoc } from 'firebase/firestore';
+import moment from 'moment-timezone';
 import { db } from 'shared/utils/firebase';
 
 export const cancelBoatRental = async (
@@ -16,12 +17,14 @@ export const createBoatRental = async (
   userId: string,
   amount: boolean,
   currency: string,
-  date: string
+  startDate: string,
+  endDate: string
 ) => {
   await setDoc(doc(db, `boats/${boatId}/rentals`, boatRentalId), {
     userId,
     processingPayment: true,
-    date,
+    startDate: moment(startDate).toDate(),
+    endDate: moment(endDate).toDate(),
     price: { amount, currency },
   });
 };

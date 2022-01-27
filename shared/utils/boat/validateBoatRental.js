@@ -1,28 +1,62 @@
 import { collection, getDocs, query, where } from 'firebase/firestore';
+import moment from 'moment-timezone';
 import { db } from 'shared/utils/firebase';
 
-const boatRentalValidation = async (boat, date) => {
-  const boatRentalsQuery = query(
-    collection(db, `boats/${boat.id}/rentals`),
-    where('date', '==', date)
-  );
-  const boatRentals = await getDocs(boatRentalsQuery);
+const alreadyRentedError = {
+  status: 409,
+  error: 'This boat is already rented at the selected time.',
+};
 
-  if (!boatRentals.docs.length) {
-    return {};
+const boatRentalValidation = async (boat, startDate, endDate) => {
+  const intervalStart = moment(startDate)
+    .tz('UTC')
+    .subtract(boat.rentMinuteInterval, 'minutes')
+    .toDate();
+  const intervalEnd = moment(endDate)
+    .tz('UTC')
+    .add(boat.rentMinuteInterval, 'minutes')
+    .toDate();
+
+  console.log('intervalStart', intervalStart);
+  console.log('intervalEnd', intervalEnd);
+
+  // Searches rentals whose end date overlaps with the interval
+  let boatRentals = await getDocs(
+    query(
+      collection(db, `boats/${boat.id}/rentals`),
+      where('endDate', '>', intervalStart),
+      where('endDate', '<', intervalEnd)
+    )
+  );
+
+  if (boatRentals.docs.length) {
+    console.log('existing end date overlapping with interval');
+    return alreadyRentedError;
   }
 
-  return {
-    status: 409,
-    error: 'This boat is already rented on the selected date.',
-  };
+  // Searches rentals whose start date overlaps with the interval
+  boatRentals = await getDocs(
+    query(
+      collection(db, `boats/${boat.id}/rentals`),
+      where('startDate', '>', intervalStart),
+      where('startDate', '<', intervalEnd)
+    )
+  );
+
+  if (boatRentals.docs.length) {
+    console.log('existing start date overlapping with interval');
+    return alreadyRentedError;
+  }
+
+  return { status: null, error: null };
 };
 
 export const validateBoatRental = async (
   boat,
   amount,
   currency,
-  date,
+  startDate,
+  endDate,
   validateRental
 ) => {
   if (!boat) {
@@ -48,8 +82,8 @@ export const validateBoatRental = async (
   }
 
   if (validateRental) {
-    return boatRentalValidation(boat, date);
+    return boatRentalValidation(boat, startDate, endDate);
   }
 
-  return {};
+  return { status: null, error: null };
 };

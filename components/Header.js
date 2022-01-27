@@ -43,7 +43,7 @@ function Header({ placeholder }) {
   };
 
   const clickPopup = () => {
-    if (menuPopup == true) {
+    if (menuPopup === true) {
       setMenuPopup(false);
     } else {
       setMenuPopup(true);
