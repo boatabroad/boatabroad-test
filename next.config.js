@@ -11,6 +11,7 @@ module.exports = {
       'boatabroad.com',
       'drive.google.com',
       'lh3.googleusercontent.com',
+      'images.pexels.com',
     ],
     formats: ['image/avif', 'image/webp'],
   },

@@ -1,0 +1,22 @@
+@mixin flexCenter {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.googleLogin {
+  width: 100%;
+  height: 7 0px;
+  @include flexCenter();
+  cursor: pointer;
+  border: 1px solid silver;
+  border-radius: 7px;
+  padding: 7px 0;
+  box-shadow: 0.2em 0.2em 0.3em silver;
+}
+.googleIcon {
+  width: 20px;
+  height: 20px;
+}
+.googleText {
+  margin-left: 1em;
+}

@@ -4,6 +4,9 @@ import { useRouter } from 'next/router';
 import style from './style.module.scss';
 import Image from 'next/image';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import Logo from 'components/logo';
+import H1 from 'components/h1';
+import GoogleButton from 'components/googleButton';
 
 const Register = () => {
   const router = useRouter();
@@ -16,6 +19,7 @@ const Register = () => {
 
   console.log(errors);
   console.log(image);
+  console.log(Logo);
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
@@ -167,69 +171,60 @@ const Register = () => {
     //   </div>
     // </div>
     <div className={style.container}>
-      <h1 className={style.h1Text}>Welcome to BoataBroad</h1>
+      <div className={style.left}>
+        {/* <Logo size={40} /> */}
+        {/* <H1 color="#00bfc1" text="Welcome to BoataBroad" /> */}
+        <H1 color="white" text="Are you Owner?" />
+        <p>
+          “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.”
+        </p>
+      </div>
 
-      <form onSubmit={handleFormSubmit} className={style.form}>
-        <div className={style.mid}>
-          <div className={style.boxForm}>
-            <pre className={style.miniPre}>User Name</pre>
-            <input
-              name="username"
-              type="text"
-              className={style.input}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <pre className={style.miniPre}>Email</pre>
-            <input
-              type="email"
-              className={style.input}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              // placeholder="Example@something.com"
-            />
-            <pre className={style.miniPre}>Password</pre>
-            <input
-              className={style.input}
-              name="password"
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </div>
-          <div
-            className={style.cameraPick}
-            id="fileSelector"
-            name="file"
-            onClick={handlePictureClick}
-          >
-            <Image
-              src={'/images/camera.png'}
-              // layout="fill"
-              width={50}
-              height={50}
-            />
-            {/* <input className={style.cameraPick}
+      <div className={style.right}>
+        <H1 color="#00bfc1" text="Create Account" />
+        <form onSubmit={handleFormSubmit} className={style.form}>
+          <div className={style.mid}>
+            <div className={style.boxForm}>
+              <input
+                name="username"
+                type="text"
+                className={style.input}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Name"
+              />
+              <input
+                type="email"
+                className={style.input}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+              />
+              <input
+                className={style.input}
+                name="password"
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="Password"
+              />
+            </div>
+            <div
+              className={style.cameraPick}
               id="fileSelector"
-              type="file"
               name="file"
-              style={{ outline: 'none', display: "none" }}
               onClick={handlePictureClick}
-            /> */}
+            >
+              <Image src={'/images/camera.png'} width={50} height={50} />
+            </div>
           </div>
-        </div>
 
-        <button className={style.button}>Register</button>
-        <h4 className={style.h4Text}>Or</h4>
-        <div className={style.googleLogin} onClick={googleLogin}>
-          <img
-            className={style.googleIcon}
-            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-            alt="google button"
-          />
-          <p className={style.googleText}>Continue with Google</p>
-        </div>
-      </form>
+          <button className={style.button}>Register</button>
+          <h4 className={style.h4Text}>or</h4>
+          <GoogleButton onClick={googleLogin} />
+        </form>
+      </div>
     </div>
   );
 };

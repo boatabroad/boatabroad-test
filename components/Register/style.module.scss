@@ -8,39 +8,54 @@
   width: 100vw;
   height: 100vh;
   @include flexCenter();
-  flex-flow: column;
-  flex: 1;
   background: #f9f9f9;
+  flex-wrap: wrap;
 }
-.h1Text {
-  color: black;
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-bottom: 1em;
+
+.left,
+.right {
+  width: 500px;
+  height: 500px;
+  box-shadow: 0.2em 0.2em 0.5em silver;
+  padding: 1.5em;
+}
+.left {
+  background-image: linear-gradient(
+      hsla(0, 0%, 0%, 0.241),
+      hsla(0, 0%, 0%, 0.3)
+    ),
+    url('https://images.pexels.com/photos/4091042/pexels-photo-4091042.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  // @include flexCenter();
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-flow: column;
+}
+.right {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background: white;
 }
 .form {
-  width: 450px;
-  height: 450px;
-  display: flex;
+  width: 100%;
+  height: 100%;
+  // display: flex;
+  @include flexCenter();
   flex-flow: column;
   border-radius: 13px;
-  padding: 1.5em;
   background: white;
-  box-shadow: 0.2em 0.2em 0.5em silver;
 }
 .mid {
   width: 100%;
-  height: 100%;
+  height: 200px;
   display: flex;
   border-radius: 13px;
-}
-.cameraPick {
-  width: 100%;
-  height: 100%;
-  @include flexCenter();
-  flex: 1;
-  cursor: pointer;
-  background: #f9f9f9;
 }
 .boxForm {
   width: 100%;
@@ -51,9 +66,15 @@
   flex: 1;
   padding-right: 1em;
 }
-.miniPre {
-  font-size: 0.7em;
+.cameraPick {
+  width: 100%;
+  height: 100%;
+  @include flexCenter();
+  flex: 1;
+  cursor: pointer;
+  background: #f9f9f9;
 }
+
 .input {
   width: 100%;
   height: 30px;
@@ -67,26 +88,11 @@
   text-align: center;
   margin: 0.5em 0;
 }
-.googleLogin {
-  width: 100%;
-  height: 7 0px;
-  @include flexCenter();
-  cursor: pointer;
-  border: 1px solid silver;
-  border-radius: 7px;
-  padding: 7px 0;
-}
-.googleIcon {
-  width: 20px;
-  height: 20px;
-}
-.googleText {
-  margin-left: 1em;
-}
 .button {
   width: 100%;
   padding: 7px 0;
   background: #00bfc1;
+  box-shadow: 0.2em 0.2em 0.3em #00bfc1;
   color: white;
   font-weight: bold;
   border-radius: 7px;

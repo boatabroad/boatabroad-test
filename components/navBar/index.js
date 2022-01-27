@@ -6,7 +6,7 @@ import style from './navBar.module.scss';
 const NavBar = () => {
   return (
     <div className={style.navBar}>
-      <Logo />
+      <Logo size={80} />
       <UserPictureNav />
     </div>
   );
