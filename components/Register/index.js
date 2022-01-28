@@ -15,7 +15,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
   const [creatingAccount, setCreatingAccount] = useState(false);
-  const [image, setImage] = useState('');
+  const [image] = useState('');
 
   console.log(errors);
   console.log(image);
@@ -102,16 +102,12 @@ const Register = () => {
       });
   };
 
-  const handlePictureClick = () => {
-    document.querySelector('#fileSelector').click();
-  };
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(file);
-    }
-  };
-  console.log(handleFileChange);
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setImage(file);
+  //   }
+  // };
 
   return (
     // <div className="h-screen flex bg-gray-bg1">
@@ -210,12 +206,7 @@ const Register = () => {
                 placeholder="Password"
               />
             </div>
-            <div
-              className={style.cameraPick}
-              id="fileSelector"
-              name="file"
-              onClick={handlePictureClick}
-            >
+            <div className={style.cameraPick}>
               <Image src={'/images/camera.png'} width={50} height={50} />
             </div>
           </div>
