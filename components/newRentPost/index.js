@@ -1,52 +1,113 @@
-import Image from 'next/image';
 import React, { useState } from 'react';
 import style from './newRentPost.module.scss';
+
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage';
+
+// gs://boatabroad-app.appspot.com
 
 const NewRentPost = () => {
   const [title, setTitle] = useState('');
   const [subtitle, setsubtitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
+  const storage = getStorage();
 
   console.log(title, subtitle, description);
+
   const handlePost = (e) => {
     e.preventDefault();
   };
 
-  const handlePictureClick = () => {
-    document.querySelector('#fileSelector').click();
-  };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setImage(file);
     }
   };
-  console.log(handleFileChange);
+
+  const metadata = {
+    contentType: 'image/jpeg',
+  };
+
+  // Upload file and metadata to the object 'images/mountains.jpg'
+  const storageRef = ref(storage, 'images/' + image.name);
+  const uploadTask = uploadBytesResumable(storageRef, image, metadata);
+
+  // Listen for state changes, errors, and completion of the upload.
+  const upload = uploadTask.on(
+    'state_changed',
+    (snapshot) => {
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case 'paused':
+          console.log('Upload is paused');
+          break;
+        case 'running':
+          console.log('Upload is running');
+          break;
+      }
+    },
+    (error) => {
+      switch (error.code) {
+        case 'storage/unauthorized':
+          // User doesn't have permission to access the object
+          break;
+
+        case 'storage/canceled':
+          // User canceled the upload
+          break;
+
+        case 'storage/unknown':
+          // Unknown error occurred, inspect error.serverResponse
+          break;
+      }
+    },
+    () => {
+      // Upload completed successfully, now we can get the download URL
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        console.log('File available at', downloadURL);
+      });
+    }
+  );
+
+  // const uploadImage = () => {
+  //   const upload = storage.ref(`images/${image.name}`).put(image)
+  //   upload.on(
+  //     "stateChange",
+  //     snapshot => { console.log(snapshot); },
+  //     error => { console.log(error) },
+  //     () => {
+  //       storage
+  //         .ref("images")
+  //         .child(image.nam)
+  //         .getDownloadURL()
+  //         .then(url => {
+  //           console.log(url);
+  //         })
+  //     }
+  //   )
+  // }
 
   return (
     <form className={style.newRentPost} onSubmit={handlePost}>
       <h3 className={style.uploadText}>Rent new Boat</h3>
-      {image > 0 ? (
-        <Image
-          alt="Picture of the author"
-          width={300}
-          height={300}
-          className={style.uploadImg}
-        />
-      ) : (
+
+      <div className={style.uploadImg}>
         <input
-          className={style.uploadImg}
-          id="fileSelector"
           type="file"
-          name="file"
-          style={{ outline: 'none' }}
-          onClick={handlePictureClick}
+          onChange={handleFileChange}
           placeholder="+ Upload Photo"
         />
-      )}
-
+      </div>
       <h3 className={style.titleText}>Title</h3>
+
       <textarea
         className={style.title}
         onChange={(e) => setTitle(e.target.value)}
@@ -63,6 +124,7 @@ const NewRentPost = () => {
         className={style.description}
         onChange={(e) => setDescription(e.target.value)}
       ></textarea>
+      <button onClick={upload}>Upload</button>
     </form>
   );
 };
