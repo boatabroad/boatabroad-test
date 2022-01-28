@@ -16,4 +16,6 @@ export const createBoat = async (req: VercelRequest, res: VercelResponse) => {
     rentMinuteInterval: 60,
     published: false,
   });
+
+  res.json({ message: 'Boat created successfully' });
 };
