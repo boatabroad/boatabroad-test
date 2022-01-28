@@ -34,7 +34,7 @@ const Register = () => {
       // The form is correct, so we can create the account
       setCreatingAccount(true);
       // TODO change this to use the real role instead of 'tenant'
-      createAccount(username, password, 'tenant')
+      createAccount(email, password, 'tenant')
         .then(() => {
           router.replace('/dashboard');
         })
