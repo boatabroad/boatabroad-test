@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import style from './newRentPost.module.scss';
-
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-
 import { v4 as uuidv4 } from 'uuid';
+import sweetAlert from 'sweetalert';
 import useUser from 'hooks/useUser';
 import { createBoat } from 'services/api/boats/createBoat';
 import { storage } from 'shared/utils/firebase';
+import style from './newRentPost.module.scss';
 
 const imageId = uuidv4();
 
@@ -55,10 +54,20 @@ const NewRentPost = () => {
       subtitle,
       description,
       price: { amount: 10, currency: 'USD' },
-    }).then((response) => {
-      // TODO redirect to the new boat detail page
-      console.log('Created boat with id', response.data.id);
-    });
+    })
+      .then((response) => {
+        // TODO redirect to the new boat detail page
+        console.log('Created boat with id', response.data.id);
+        sweetAlert('Success', 'The boat was created successfully!', 'success');
+      })
+      .catch((error) => {
+        console.error('error creating the boat', error);
+        sweetAlert(
+          'Error',
+          'There was an error creating the boat, please try again later.',
+          'error'
+        );
+      });
   };
 
   return (
