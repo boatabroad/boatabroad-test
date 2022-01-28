@@ -1,92 +1,65 @@
 import React, { useState } from 'react';
 import style from './newRentPost.module.scss';
 
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 import { v4 as uuidv4 } from 'uuid';
 import useUser from 'hooks/useUser';
 import { createBoat } from 'services/api/boats/createBoat';
+import { storage } from 'shared/utils/firebase';
 
-const uuid = uuidv4();
+const imageId = uuidv4();
 
 const NewRentPost = () => {
   const { user } = useUser();
   const [title, setTitle] = useState('');
-  const [subtitle, setsubtitle] = useState('');
+  const [subtitle, setSubtitle] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
-  const storage = getStorage();
-
-  console.log(title, subtitle, description);
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [photoUrl, setPhotoUrl] = useState(null);
 
   const handlePost = (e) => {
     e.preventDefault();
   };
 
   const handleFileChange = (e) => {
+    setUploadingImage(true);
     const file = e.target.files[0];
-    if (file) {
-      setImage(file);
-    }
+    const storageRef = ref(storage, `images/${imageId}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    // Listen for state changes, errors, and completion of the upload.
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        console.log(snapshot);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        // Upload completed successfully, now we can get the download URL
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setPhotoUrl(downloadURL);
+          setUploadingImage(false);
+        });
+      }
+    );
   };
-
-  const metadata = {
-    contentType: 'image/jpeg',
-  };
-
-  // Upload file and metadata to the object 'images/mountains.jpg'
-  const storageRef = ref(storage, 'images/' + image.name + '-id:' + uuid);
-  const uploadTask = uploadBytesResumable(storageRef, image, metadata);
-
-  // Listen for state changes, errors, and completion of the upload.
-  uploadTask.on(
-    'state_changed',
-    (snapshot) => {
-      console.log(snapshot);
-    },
-    (error) => {
-      console.log(error);
-    },
-    () => {
-      // Upload completed successfully, now we can get the download URL
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        console.log('File available at', downloadURL);
-      });
-    }
-  );
 
   const handleSubmit = () => {
     createBoat({
       ownerId: user.uid,
-      photoUrl: 'http://example.com',
+      photoUrl,
       title,
       subtitle,
+      description,
       price: { amount: 10, currency: 'USD' },
+    }).then((response) => {
+      // TODO redirect to the new boat detail page
+      console.log('Created boat with id', response.data.id);
     });
   };
-
-  // const uploadImage = () => {
-  //   const upload = storage.ref(`images/${image.name}`).put(image)
-  //   upload.on(
-  //     "stateChange",
-  //     snapshot => { console.log(snapshot); },
-  //     error => { console.log(error) },
-  //     () => {
-  //       storage
-  //         .ref("images")
-  //         .child(image.nam)
-  //         .getDownloadURL()
-  //         .then(url => {
-  //           console.log(url);
-  //         })
-  //     }
-  //   )
-  // }
 
   return (
     <form className={style.newRentPost} onSubmit={handlePost}>
@@ -109,7 +82,7 @@ const NewRentPost = () => {
       <h3 className={style.titleText}>Subtitle</h3>
       <textarea
         className={style.subtitle}
-        onChange={(e) => setsubtitle(e.target.value)}
+        onChange={(e) => setSubtitle(e.target.value)}
       ></textarea>
 
       <h3 className={style.titleText}>Description</h3>
@@ -117,7 +90,9 @@ const NewRentPost = () => {
         className={style.description}
         onChange={(e) => setDescription(e.target.value)}
       ></textarea>
-      <button onClick={handleSubmit}>Upload</button>
+      <button onClick={handleSubmit} disabled={uploadingImage}>
+        Upload
+      </button>
     </form>
   );
 };

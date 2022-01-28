@@ -16,6 +16,7 @@ const validateSchema = (req: VercelRequest, res: VercelResponse) => {
           }),
           title: joi.string().required(),
           subtitle: joi.string().required(),
+          description: joi.string().required(),
         })
         .required(),
     })

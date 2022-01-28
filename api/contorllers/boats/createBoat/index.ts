@@ -17,5 +17,5 @@ export const createBoat = async (req: VercelRequest, res: VercelResponse) => {
     published: false,
   });
 
-  res.json({ message: 'Boat created successfully' });
+  res.json({ message: 'Boat created successfully', id: boatId });
 };
