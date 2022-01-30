@@ -13,6 +13,7 @@ export const createBoat = async (req: VercelRequest, res: VercelResponse) => {
 
   await setDoc(doc(db, 'boats', boatId), {
     ...req.body,
+    createdAt: new Date(),
     rentMinuteInterval: 60,
     published: false,
   });

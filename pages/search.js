@@ -2,15 +2,47 @@ import { useRouter } from 'next/router';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 import { format } from 'date-fns';
+import { useEffect, useState } from 'react';
+import {
+  collection,
+  query,
+  limit,
+  getDocs,
+  orderBy,
+  startAfter,
+} from 'firebase/firestore';
 import InfoCard from 'components/infoCard';
 import Map from 'components/Map';
+import { db } from 'shared/utils/firebase';
 
 function Search({ searchResults }) {
   const router = useRouter();
   const { location, startDate, endDate, noOfSailors } = router.query;
+  const [boats, setBoats] = useState([]);
+  const [boatDocs, setBoatDocs] = useState([]);
   const formattedStartDate = format(new Date(startDate), 'dd MMMM yy');
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
   const dateRange = `${formattedStartDate} - ${formattedEndDate}`;
+
+  const goToNextPage = async () => {
+    const boatsQuery = query(
+      collection(db, 'boats'),
+      orderBy('title'),
+      startAfter(boatDocs[boatDocs.length - 1] || null),
+      limit(2)
+    );
+    const nextBoats = await getDocs(boatsQuery);
+
+    setBoats(nextBoats.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+    setBoatDocs(nextBoats.docs);
+  };
+
+  useEffect(() => {
+    goToNextPage();
+  }, []);
+
+  // TODO use boats
+  console.log('boats', boats);
 
   return (
     <div>
@@ -63,6 +95,7 @@ function Search({ searchResults }) {
 }
 
 export default Search;
+
 export async function getServerSideProps() {
   const searchResults = await fetch('https://jsonkeeper.com/b/5DZY').then(
     (res) => res.json()
