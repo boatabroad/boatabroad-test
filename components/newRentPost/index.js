@@ -99,9 +99,15 @@ const NewRentPost = () => {
         className={style.description}
         onChange={(e) => setDescription(e.target.value)}
       ></textarea>
-      <button onClick={handleSubmit} disabled={uploadingImage}>
-        Upload
-      </button>
+      <div className={style.butttonBox}>
+        <button
+          onClick={handleSubmit}
+          disabled={uploadingImage}
+          className={style.button}
+        >
+          Upload
+        </button>
+      </div>
     </form>
   );
 };

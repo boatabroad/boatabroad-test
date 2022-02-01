@@ -16,11 +16,16 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+.welcomeBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .h1Text {
   color: #1c1c1c;
   font-size: 1.2em;
   font-weight: bold;
-  margin-bottom: 1em;
   text-align: center;
 }
 .boxForm {
@@ -62,7 +67,7 @@
   hr {
     width: 1px;
     height: 150px;
-    background: grey;
+    background: silver;
     transform: rotateZ(90deg);
     border: 0;
   }
@@ -75,6 +80,11 @@
   justify-content: space-between;
   align-items: flex-end;
   color: grey;
+}
+.hover {
+  &:hover {
+    color: black;
+  }
 }
 .button {
   width: 100%;

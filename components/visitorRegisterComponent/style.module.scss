@@ -8,11 +8,6 @@
   width: 100vw;
   height: 100vh;
   @include flexCenter();
-  background-image: linear-gradient(hsla(0, 0%, 0%, 0.7), hsla(0, 0%, 0%, 0.7)),
-    url('/banner.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 .hover {
   &:hover {
@@ -20,9 +15,28 @@
   }
 }
 
+.left {
+  width: 50vw;
+  height: 100vh;
+  background-image: linear-gradient(to right, #02aab0 0%, #00cdac 100%);
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  padding-left: 2em;
+  h1 {
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 0.9em;
+  }
+  p {
+    font-size: 15px;
+    margin-top: 1em;
+  }
+}
 .right {
-  width: 500px;
-  // height: 500px;
+  width: 50vw;
+  height: 100vh;
   background: white;
   padding: 1.5em;
   border-radius: 10px;
@@ -35,19 +49,6 @@
   border-radius: 13px;
   background: white;
 }
-.mid {
-  width: 100%;
-  // height: 200px;
-  display: flex;
-  border-radius: 13px;
-  // background: #000;
-}
-.welcomeBox {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .boxForm {
   width: 100%;
   height: 100%;
@@ -55,24 +56,20 @@
   justify-content: center;
   flex-flow: column;
   flex: 1;
-  padding-right: 1em;
 }
-.cameraPick {
-  width: 100%;
-  height: 100%;
-  @include flexCenter();
-  flex: 1;
-  cursor: pointer;
-  background: #f9f9f9;
+.signupText {
+  font-weight: bold;
+  margin-bottom: 2em;
 }
-
 .input {
   width: 100%;
   height: 30px;
   margin-bottom: 1em;
   outline: none;
   border: none;
-  border-bottom: 1px solid #ebebeb;
+  border: 1px solid #ebebeb;
+  border-radius: 20px;
+  padding-left: 0.5em;
 }
 .h4Text {
   width: 100%;
@@ -80,12 +77,13 @@
   margin: 0.5em 0;
 }
 .button {
-  width: 100%;
+  width: 150px;
   padding: 7px 0;
-  background: #00bfc1;
+  background-image: linear-gradient(to right, #02aab0 0%, #00cdac 100%);
   box-shadow: 0.2em 0.2em 0.3em #00bfc1;
   color: white;
   font-weight: bold;
-  border-radius: 7px;
+  border-radius: 20px;
   margin-top: 2em;
+  align-self: flex-end;
 }
