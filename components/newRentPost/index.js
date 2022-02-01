@@ -1,49 +1,20 @@
 import React, { useState } from 'react';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { v4 as uuidv4 } from 'uuid';
 import sweetAlert from 'sweetalert';
 import useUser from 'hooks/useUser';
 import { createBoat } from 'services/api/boats/createBoat';
-import { storage } from 'shared/utils/firebase';
+import UploadFile from './UploadFile';
 import style from './newRentPost.module.scss';
-
-const imageId = uuidv4();
 
 const NewRentPost = () => {
   const { user } = useUser();
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [description, setDescription] = useState('');
-  const [uploadingImage, setUploadingImage] = useState(false);
-  const [photoUrl, setPhotoUrl] = useState(null);
+  const [uploadingImage] = useState(false);
+  const [photoUrl] = useState(null);
 
   const handlePost = (e) => {
     e.preventDefault();
-  };
-
-  const handleFileChange = (e) => {
-    setUploadingImage(true);
-    const file = e.target.files[0];
-    const storageRef = ref(storage, `images/${imageId}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    // Listen for state changes, errors, and completion of the upload.
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        console.log(snapshot);
-      },
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        // Upload completed successfully, now we can get the download URL
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setPhotoUrl(downloadURL);
-          setUploadingImage(false);
-        });
-      }
-    );
   };
 
   const handleSubmit = () => {
@@ -74,13 +45,8 @@ const NewRentPost = () => {
     <form className={style.newRentPost} onSubmit={handlePost}>
       <h3 className={style.uploadText}>Rent new Boat</h3>
 
-      <div className={style.uploadImg}>
-        <input
-          type="file"
-          onChange={handleFileChange}
-          placeholder="+ Upload Photo"
-        />
-      </div>
+      <UploadFile />
+
       <h3 className={style.titleText}>Title</h3>
 
       <textarea

@@ -24,5 +24,6 @@ module.exports = {
     'no-redeclare': 'error',
     'react/no-unescaped-entities': 'off',
     eqeqeq: 'error',
+    'no-unused-vars': ['error', { args: 'none' }],
   },
 };

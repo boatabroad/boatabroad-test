@@ -1,0 +1,21 @@
+.imagePreview {
+  width: 100px;
+  height: 100px;
+  border-radius: 7px;
+  border-width: 1px;
+  border-style: solid;
+  margin: 7px;
+  display: inline-block;
+  transition: 0.4s;
+}
+
+.imagePreview:hover {
+  transform: scale(1.1);
+}
+
+.filesContainer {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  margin-bottom: 2em;
+}
