@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const createBoat = ({
   ownerId,
-  photoUrl,
+  photos,
   price,
   title,
   subtitle,
@@ -10,7 +10,7 @@ export const createBoat = ({
 }) =>
   axios.post('/api/boats', {
     ownerId,
-    photoUrl,
+    photos,
     price,
     title,
     subtitle,

@@ -9,7 +9,7 @@ const validateSchema = (req: VercelRequest, res: VercelResponse) => {
         .object()
         .keys({
           ownerId: joi.string().required(),
-          photoUrl: joi.string().required(),
+          photos: joi.array().min(1).items(joi.string()).required(),
           price: joi.object().keys({
             amount: joi.number().min(0).required(),
             currency: joi.string().required(),

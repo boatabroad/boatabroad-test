@@ -10,8 +10,11 @@ const NewRentPost = () => {
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [description, setDescription] = useState('');
-  const [uploadingImage] = useState(false);
-  const [photoUrl] = useState(null);
+  const [photoUrls, setPhotoUrls] = useState([]);
+
+  const handleUploadFinish = (uploadedPhotoUrls) => {
+    setPhotoUrls(uploadedPhotoUrls);
+  };
 
   const handlePost = (e) => {
     e.preventDefault();
@@ -20,7 +23,7 @@ const NewRentPost = () => {
   const handleSubmit = () => {
     createBoat({
       ownerId: user.uid,
-      photoUrl,
+      photos: photoUrls,
       title,
       subtitle,
       description,
@@ -45,7 +48,7 @@ const NewRentPost = () => {
     <form className={style.newRentPost} onSubmit={handlePost}>
       <h3 className={style.uploadText}>Rent new Boat</h3>
 
-      <UploadFile />
+      <UploadFile onFilesUploaded={handleUploadFinish} />
 
       <h3 className={style.titleText}>Title</h3>
 
@@ -68,7 +71,7 @@ const NewRentPost = () => {
       <div className={style.butttonBox}>
         <button
           onClick={handleSubmit}
-          disabled={uploadingImage}
+          disabled={!photoUrls.length}
           className={style.button}
         >
           Upload
