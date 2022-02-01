@@ -22,6 +22,7 @@ module.exports = {
     'react/prop-types': 'off',
     'no-prototype-builtins': 'off',
     'no-redeclare': 'error',
+    'no-shadow': 'error',
     'react/no-unescaped-entities': 'off',
     eqeqeq: 'error',
     'no-unused-vars': ['error', { args: 'none' }],

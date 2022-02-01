@@ -44,18 +44,18 @@ const OwnerRegisterComponent = () => {
     }
   };
 
-  const validateCredentials = (username, password) => {
-    let errors = {};
+  const validateCredentials = (_username, _password) => {
+    let _errors = {};
 
-    if (username === '') {
-      errors.username = 'This field is required';
+    if (_username === '') {
+      _errors.username = 'This field is required';
     }
 
-    if (password === '') {
-      errors.password = 'This field is required';
+    if (_password === '') {
+      _errors.password = 'This field is required';
     }
 
-    return errors;
+    return _errors;
   };
 
   // const handleFileChange = (e) => {

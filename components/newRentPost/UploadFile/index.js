@@ -42,8 +42,7 @@ const UploadFile = () => {
   const handleDrop = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    const { files } = e.dataTransfer;
-    setFiles(getFilesArray(files));
+    setFiles(getFilesArray(e.dataTransfer.files));
   };
 
   const handleDragOver = (e) => {
