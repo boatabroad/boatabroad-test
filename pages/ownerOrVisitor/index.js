@@ -5,7 +5,7 @@ import style from './style.module.scss';
 const index = () => {
   return (
     <div className={style.container}>
-      <Link href="/register">
+      <Link href="/ownerRegister">
         <a>
           <div className={style.left}>
             <div className={style.textBox}>
@@ -20,7 +20,7 @@ const index = () => {
         </a>
       </Link>
 
-      <Link href="/register">
+      <Link href="/visitorRegister">
         <a>
           <div className={style.right}>
             <div className={style.textBox}>

@@ -10,7 +10,6 @@ import { getFilesArray } from './utils';
 
 const UploadFile = () => {
   const pickerRef = useRef();
-  const [isDragging, setIsDragging] = useState(false);
   // const [, setUploadingImage] = useState(false);
   // const [, setPhotoUrl] = useState(null);
   const [files, setFiles] = useState([]);
@@ -60,17 +59,10 @@ const UploadFile = () => {
     pickerRef.current.click();
   };
 
-  console.log(
-    'class',
-    `${style.title}${isDragging ? ` ${style.dragging}` : ''}`
-  );
-
   return (
     <>
       <div
         className={style.fileSelector}
-        onDragEnter={() => setIsDragging(true)}
-        onDragLeave={() => setIsDragging(false)}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         onClick={handlePickFile}

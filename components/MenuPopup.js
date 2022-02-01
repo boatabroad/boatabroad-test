@@ -2,6 +2,7 @@ import useUser from 'hooks/useUser';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { logOut } from 'shared/utils/firebase/logOut';
+import UserPictureProfileMobile from './userPictureProfileMobile';
 
 export const MenuPopup = () => {
   const router = useRouter();
@@ -9,7 +10,7 @@ export const MenuPopup = () => {
 
   const handleLogOut = () => {
     logOut().then(() => {
-      router.push('/login');
+      router.replace('/login');
     });
   };
 
@@ -20,6 +21,7 @@ export const MenuPopup = () => {
           'Loading...'
         ) : user ? (
           <>
+            <UserPictureProfileMobile />
             <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
               <Link href="/dashboard">
                 <a className="cursor-pointer">Dashboard</a>
@@ -40,7 +42,7 @@ export const MenuPopup = () => {
               </Link>
             </li>
             <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
-              <Link href="/register">
+              <Link href="/ownerOrVisitor">
                 <a className="cursor-pointer">Sign up</a>
               </Link>
             </li>

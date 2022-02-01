@@ -1,15 +1,29 @@
 .navBar {
   width: 100vw;
-  // box-shadow: 0.2em 0.2em 0.5em silver;
   z-index: 1000;
   display: flex;
   align-items: center;
   background: white;
+  position: fixed;
+  padding-right: 1em;
 }
 .linkText {
   display: flex;
+  flex: 1;
   font-weight: bold;
-  h1 {
-    margin-left: 1em;
+  padding-left: 1em;
+}
+
+.logo {
+  background: #00bfc1;
+  display: flex;
+  justify-content: Center;
+  align-items: center;
+}
+// ===========
+
+@media all and(max-width:780px) {
+  .navBar {
+    display: none;
   }
 }

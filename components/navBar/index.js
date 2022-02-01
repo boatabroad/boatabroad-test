@@ -1,9 +1,12 @@
-import Logo from 'components/logo';
-import UserPictureNav from 'components/userPictureNav';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import UserPictureNav from 'components/userPictureNav';
+import { MenuPopup } from 'components/MenuPopup';
+import { MenuAlt4Icon } from '@heroicons/react/solid';
+
 import style from './navBar.module.scss';
+import Image from 'next/image';
 
 const routes = [
   {
@@ -23,10 +26,25 @@ const routes = [
 const NavBar = () => {
   const router = useRouter();
   const { pathname } = router;
+  const [menuPopup, setMenuPopup] = useState(false);
+
+  const clickPopup = () => {
+    if (menuPopup === true) {
+      setMenuPopup(false);
+    } else {
+      setMenuPopup(true);
+    }
+  };
 
   return (
     <div className={style.navBar}>
-      <Logo size={80} src="/images/logoWhite.png" background="#56c0c2" />
+      <Image
+        src="/images/logoWhite.png"
+        alt="Company Logo"
+        className={style.logo}
+        width={80}
+        height={80}
+      />
       <UserPictureNav />
       <div className={style.linkText}>
         {routes.map((item, index) => {
@@ -36,8 +54,9 @@ const NavBar = () => {
                 style={{
                   color: pathname === item.href ? '#00bfc1' : 'grey',
                   cursor: 'pointer',
-                  marginLeft: '1em',
+                  margin: '0 2em',
                 }}
+                className="space-x-2"
               >
                 {item.name}
               </a>
@@ -45,6 +64,8 @@ const NavBar = () => {
           );
         })}
       </div>
+      <MenuAlt4Icon onClick={clickPopup} className="h-8 cursor-pointer" />
+      {menuPopup && <MenuPopup />}
     </div>
   );
 };
