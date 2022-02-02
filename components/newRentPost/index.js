@@ -70,8 +70,8 @@ const NewRentPost = () => {
         onChange={(e) => setSubtitle(e.target.value)}
       ></textarea>
 
-      <div className="flex justify-between">
-        <div className="w-1/2 mr-7">
+      <div className="flex flex-col md:flex-row justify-between">
+        <div className="md:w-1/2 md:mr-7">
           <h3 className={style.titleText}>Boat type</h3>
           <select
             className={style.boatType}
@@ -86,7 +86,7 @@ const NewRentPost = () => {
           </select>
         </div>
 
-        <div className="w-1/2 ml-7">
+        <div className="md:w-1/2 md:mr-7">
           <h3 className={style.titleText}>With or without captain</h3>
           <select
             className={style.boatType}
@@ -98,8 +98,8 @@ const NewRentPost = () => {
         </div>
       </div>
 
-      <div className="flex justify-between">
-        <div className="w-1/2 mr-7">
+      <div className="flex flex-col md:flex-row justify-between">
+        <div className="md:w-1/2 md:mr-7">
           <h3 className={style.titleText}>City</h3>
           <textarea
             className={style.field}
@@ -107,7 +107,7 @@ const NewRentPost = () => {
             onChange={(e) => setCity(e.target.value)}
           ></textarea>
         </div>
-        <div className="w-1/2 ml-7">
+        <div className="md:w-1/2 md:mr-7">
           <h3 className={style.titleText}>Beach</h3>
           <textarea
             className={style.field}
