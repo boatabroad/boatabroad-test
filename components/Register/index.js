@@ -60,17 +60,10 @@ const Register = () => {
     return _errors;
   };
 
-  // const handleFileChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     setImage(file);
-  //   }
-  // };
-
   return (
     <div className={style.container}>
       <div className={style.right}>
-        {/* <H1 color="#00bfc1" text="Create Account" /> */}
+        {/* Left side */}
         <div className={style.welcomeBox}>
           <Image
             src="/images/logoColor.png"
@@ -80,6 +73,8 @@ const Register = () => {
           />
           <h1 className={style.h1Text}>Welcome to BoataBroad</h1>
         </div>
+
+        {/* Right side */}
         <form onSubmit={handleFormSubmit} className={style.form}>
           <div className={style.mid}>
             <div className={style.boxForm}>
