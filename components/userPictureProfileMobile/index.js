@@ -4,13 +4,8 @@ import Image from 'next/image';
 import style from './style.module.scss';
 
 const UserPictureProfileMobile = () => {
-  const data = useUser();
+  const { user } = useUser();
 
-  if (!data) {
-    return;
-  }
-
-  const { user } = data;
   const name = user?.displayName;
   const userPic = user?.photoURL;
 

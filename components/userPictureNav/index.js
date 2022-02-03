@@ -3,22 +3,27 @@ import Image from 'next/image';
 import React from 'react';
 import style from './userPictureNav.module.scss';
 
-const UserPictureNav = () => {
-  const data = useUser();
-
-  if (!data) {
-    return;
+const getAvatarUrl = (user) => {
+  if (!user) {
+    return null;
   }
 
-  const { user } = data;
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(
+    user.name || user.email
+  )}&background=0D8ABC&color=fff&size=40&bold=true`;
+};
+
+const UserPictureNav = () => {
+  const { user } = useUser();
   const name = user?.displayName;
-  const userPic = user?.photoURL;
+  const defaultAvatarUrl = getAvatarUrl(user);
+  const avatarUrl = user?.photoURL || defaultAvatarUrl;
 
   return (
     <div className={style.userPictureNav}>
-      {userPic ? (
+      {avatarUrl ? (
         <Image
-          src={userPic}
+          src={avatarUrl}
           alt="Picture of the author"
           width={60}
           height={60}

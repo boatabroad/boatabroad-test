@@ -12,6 +12,7 @@ module.exports = {
       'drive.google.com',
       'lh3.googleusercontent.com',
       'images.pexels.com',
+      'ui-avatars.com',
     ],
     formats: ['image/avif', 'image/webp'],
   },
