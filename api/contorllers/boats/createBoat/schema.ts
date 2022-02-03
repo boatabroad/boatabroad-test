@@ -10,13 +10,27 @@ const validateSchema = (req: VercelRequest, res: VercelResponse) => {
         .keys({
           ownerId: joi.string().required(),
           photos: joi.array().min(1).items(joi.string()).required(),
-          price: joi.object().keys({
-            amount: joi.number().min(0).required(),
-            currency: joi.string().required(),
-          }),
           title: joi.string().required(),
           subtitle: joi.string().required(),
+          boatType: joi.string().required(),
+          size: joi.number().min(0).required(),
+          crew: joi.number().min(0).required(),
+          city: joi.string().required(),
+          beach: joi.string().required(),
           description: joi.string().required(),
+          rentBy: joi.string().valid('Hour', 'Day').required(),
+          price: joi.object().keys({
+            amount: joi.number().min(0).required(),
+            currency: joi.string().valid('USD', 'MXN').required(),
+          }),
+          minimumTime: joi.number().min(0).required(),
+          damageDeposit: joi.number().min(0).required(),
+          sailors: joi.number().min(0).required(),
+          includesFood: joi.boolean().required(),
+          includesDrinks: joi.boolean().required(),
+          bathrooms: joi.number().min(0).required(),
+          bedrooms: joi.number().min(0).required(),
+          hasKitchen: joi.boolean().required(),
         })
         .required(),
     })
