@@ -3,7 +3,7 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
 import { useState } from 'react';
-import { SearchIcon, MenuAlt4Icon, UsersIcon } from '@heroicons/react/solid';
+import { SearchIcon, MenuIcon, UsersIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
 import { MenuPopup } from './MenuPopup';
 
@@ -91,7 +91,7 @@ function Header({ placeholder }) {
       {/* Right */}
       <div className="flex space-x-6 items-center justify-end">
         <UsersIcon className="h-6 cursor-pointer" />
-        <MenuAlt4Icon onClick={clickPopup} className="h-8 cursor-pointer" />
+        <MenuIcon onClick={clickPopup} className="h-8 cursor-pointer" />
         {menuPopup && <MenuPopup />}
       </div>
 

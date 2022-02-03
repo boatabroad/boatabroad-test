@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import UserPictureNav from 'components/userPictureNav';
 import { MenuPopup } from 'components/MenuPopup';
-import { MenuAlt4Icon } from '@heroicons/react/solid';
+import { MenuIcon } from '@heroicons/react/solid';
 
 import style from './navBar.module.scss';
 import Image from 'next/image';
@@ -64,7 +64,7 @@ const NavBar = () => {
           );
         })}
       </div>
-      <MenuAlt4Icon onClick={clickPopup} className="h-8 cursor-pointer" />
+      <MenuIcon onClick={clickPopup} className="h-8 cursor-pointer" />
       {menuPopup && <MenuPopup />}
     </div>
   );

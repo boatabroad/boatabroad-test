@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import style from './style.module.scss';
-import { MenuAlt4Icon } from '@heroicons/react/solid';
+import { MenuIcon } from '@heroicons/react/solid';
 import { MenuPopup } from 'components/MenuPopup';
 import Image from 'next/image';
 
@@ -23,7 +23,7 @@ const MobileNav = () => {
         width={40}
         height={40}
       />
-      <MenuAlt4Icon onClick={clickPopup} className="h-8 cursor-pointer" />
+      <MenuIcon onClick={clickPopup} className="h-8 cursor-pointer" />
       {menuPopup && <MenuPopup />}
     </div>
   );
