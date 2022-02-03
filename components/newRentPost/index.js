@@ -4,7 +4,7 @@ import useUser from 'hooks/useUser';
 import { createBoat } from 'services/api/boats/createBoat';
 import UploadFile from './UploadFile';
 import style from './newRentPost.module.scss';
-import { BOAT_TYPES } from './constants';
+import { BOAT_TYPES, RENT_BY_OPTIONS } from './constants';
 
 const NewRentPost = () => {
   const { user } = useUser();
@@ -16,6 +16,11 @@ const NewRentPost = () => {
   const [city, setCity] = useState('');
   const [beach, setBeach] = useState('');
   const [description, setDescription] = useState('');
+  const [rentBy, setRentBy] = useState(RENT_BY_OPTIONS[0]);
+  const [price, setPrice] = useState('');
+  const [minimumTime, setMinimumTime] = useState(1);
+  const [damageDeposit, setDamageDeposit] = useState('');
+  const [sailors, setSailors] = useState(0);
 
   const handleUploadFinish = (uploadedPhotoUrls) => {
     setPhotoUrls(uploadedPhotoUrls);
@@ -74,7 +79,7 @@ const NewRentPost = () => {
         <div className="md:w-1/2 md:mr-7">
           <h3 className={style.titleText}>Boat type</h3>
           <select
-            className={style.boatType}
+            className={style.field}
             value={boatType}
             onChange={(e) => setBoatType(e.target.value)}
           >
@@ -86,10 +91,10 @@ const NewRentPost = () => {
           </select>
         </div>
 
-        <div className="md:w-1/2 md:mr-7">
+        <div className="md:w-1/2 md:ml-7">
           <h3 className={style.titleText}>With or without captain</h3>
           <select
-            className={style.boatType}
+            className={style.field}
             onChange={(e) => setWithCaptain(e.target.value === 'WithCaptain')}
           >
             <option value="WithCaptain">With captain</option>
@@ -107,8 +112,9 @@ const NewRentPost = () => {
             onChange={(e) => setCity(e.target.value)}
           ></textarea>
         </div>
-        <div className="md:w-1/2 md:mr-7">
-          <h3 className={style.titleText}>Beach</h3>
+
+        <div className="md:w-1/2 md:ml-7">
+          <h3 className={style.titleText}>Marina / Beach</h3>
           <textarea
             className={style.field}
             value={beach}
@@ -119,9 +125,65 @@ const NewRentPost = () => {
 
       <h3 className={style.titleText}>Description</h3>
       <textarea
-        className={style.description}
+        className={`${style.field} ${style.description}`}
         onChange={(e) => setDescription(e.target.value)}
       ></textarea>
+
+      <div className="flex flex-col md:flex-row justify-between">
+        <div className="md:w-1/5 md:mr-3">
+          <h3 className={style.titleText}>Rent by</h3>
+          <select
+            className={style.field}
+            value={rentBy}
+            onChange={(e) => setRentBy(e.target.value)}
+          >
+            {RENT_BY_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="md:w-1/5 md:ml-3 md:mr-3">
+          <h3 className={style.titleText}>Price per {rentBy}</h3>
+          <textarea
+            className={style.field}
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          ></textarea>
+        </div>
+        <div className="md:w-1/5 md:ml-3 md:mr-3">
+          <h3 className={style.titleText}>Minimum {rentBy}s</h3>
+          <input
+            className={style.field}
+            type="number"
+            value={minimumTime}
+            min={1}
+            max={100}
+            onChange={(e) => setMinimumTime(e.target.value)}
+          ></input>
+        </div>
+        <div className="md:w-1/5 md:ml-3 md:mr-3">
+          <h3 className={style.titleText}>Damage deposit</h3>
+          <textarea
+            className={style.field}
+            value={damageDeposit}
+            onChange={(e) => setDamageDeposit(e.target.value)}
+          ></textarea>
+        </div>
+        <div className="md:w-1/5 md:ml-3">
+          <h3 className={style.titleText}>Num of sailors</h3>
+          <input
+            className={style.field}
+            type="number"
+            min={0}
+            max={100}
+            value={sailors}
+            onChange={(e) => setSailors(e.target.value)}
+          ></input>
+        </div>
+      </div>
+
       <div className={style.butttonBox}>
         <button
           onClick={handleSubmit}
