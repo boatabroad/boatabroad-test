@@ -4,7 +4,13 @@ import useUser from 'hooks/useUser';
 import { createBoat } from 'services/api/boats/createBoat';
 import UploadFile from './UploadFile';
 import style from './newRentPost.module.scss';
-import { BOAT_TYPES, BOOLEAN_OPTIONS, RENT_BY_OPTIONS } from './constants';
+import {
+  BOAT_TYPES,
+  CREW_OPTIONS,
+  BOOLEAN_OPTIONS,
+  CURRENCY_OPTIONS,
+  RENT_BY_OPTIONS,
+} from './constants';
 
 const NewRentPost = () => {
   const { user } = useUser();
@@ -12,12 +18,14 @@ const NewRentPost = () => {
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [boatType, setBoatType] = useState(BOAT_TYPES[0]);
-  const [withCaptain, setWithCaptain] = useState(true);
+  const [size, setSize] = useState('');
+  const [crew, setCrew] = useState(CREW_OPTIONS[0]);
   const [city, setCity] = useState('');
   const [beach, setBeach] = useState('');
   const [description, setDescription] = useState('');
+  const [currency, setCurrency] = useState(CURRENCY_OPTIONS[0]);
   const [rentBy, setRentBy] = useState(RENT_BY_OPTIONS[0]);
-  const [price, setPrice] = useState('');
+  const [priceAmount, setPriceAmount] = useState('');
   const [minimumTime, setMinimumTime] = useState(1);
   const [damageDeposit, setDamageDeposit] = useState('');
   const [sailors, setSailors] = useState(0);
@@ -41,8 +49,22 @@ const NewRentPost = () => {
       photos: photoUrls,
       title,
       subtitle,
+      boatType,
+      size: +size,
+      crew: +crew,
+      city,
+      beach,
       description,
-      price: { amount: 10, currency: 'USD' },
+      rentBy,
+      price: { amount: +priceAmount, currency },
+      minimumTime: +minimumTime,
+      damageDeposit: +damageDeposit,
+      sailors: +sailors,
+      includesFood: includesFood === 'Yes',
+      includesDrinks: includesDrinks === 'Yes',
+      bathrooms: +bathrooms,
+      bedrooms: +bedrooms,
+      hasKitchen: hasKitchen === 'Yes',
     })
       .then((response) => {
         // TODO redirect to the new boat detail page
@@ -58,8 +80,6 @@ const NewRentPost = () => {
         );
       });
   };
-
-  console.log('withCaptain', withCaptain);
 
   return (
     <form className={style.newRentPost} onSubmit={handlePost}>
@@ -81,7 +101,7 @@ const NewRentPost = () => {
       ></textarea>
 
       <div className="flex flex-col md:flex-row justify-between">
-        <div className="md:w-1/2 md:mr-7">
+        <div className="md:w-1/3 md:mr-6">
           <h3 className={style.titleText}>Boat type</h3>
           <select
             className={style.field}
@@ -96,14 +116,27 @@ const NewRentPost = () => {
           </select>
         </div>
 
-        <div className="md:w-1/2 md:ml-7">
-          <h3 className={style.titleText}>With or without captain</h3>
+        <div className="md:w-1/3 md:ml-6 md:mr-6">
+          <h3 className={style.titleText}>Size (ft)</h3>
+          <textarea
+            className={style.field}
+            value={size}
+            onChange={(e) => setSize(e.target.value)}
+          ></textarea>
+        </div>
+
+        <div className="md:w-1/3 md:ml-6">
+          <h3 className={style.titleText}>Crew</h3>
           <select
             className={style.field}
-            onChange={(e) => setWithCaptain(e.target.value === 'WithCaptain')}
+            value={crew}
+            onChange={(e) => setCrew(e.target.value === 'WithCaptain')}
           >
-            <option value="WithCaptain">With captain</option>
-            <option value="Without captain">Without captain</option>
+            {CREW_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
           </select>
         </div>
       </div>
@@ -135,7 +168,21 @@ const NewRentPost = () => {
       ></textarea>
 
       <div className="flex flex-col md:flex-row justify-between">
-        <div className="md:w-1/5 md:mr-3">
+        <div className="md:w-1/6 md:mr-3">
+          <h3 className={style.titleText}>Currency</h3>
+          <select
+            className={style.field}
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+          >
+            {CURRENCY_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="md:w-1/6 md:ml-3 md:mr-3">
           <h3 className={style.titleText}>Rent by</h3>
           <select
             className={style.field}
@@ -149,15 +196,15 @@ const NewRentPost = () => {
             ))}
           </select>
         </div>
-        <div className="md:w-1/5 md:ml-3 md:mr-3">
+        <div className="md:w-1/6 md:ml-3 md:mr-3">
           <h3 className={style.titleText}>Price per {rentBy}</h3>
           <textarea
             className={style.field}
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            value={priceAmount}
+            onChange={(e) => setPriceAmount(e.target.value)}
           ></textarea>
         </div>
-        <div className="md:w-1/5 md:ml-3 md:mr-3">
+        <div className="md:w-1/6 md:ml-3 md:mr-3">
           <h3 className={style.titleText}>Minimum {rentBy}s</h3>
           <input
             className={style.field}
@@ -168,7 +215,7 @@ const NewRentPost = () => {
             onChange={(e) => setMinimumTime(e.target.value)}
           ></input>
         </div>
-        <div className="md:w-1/5 md:ml-3 md:mr-3">
+        <div className="md:w-1/6 md:ml-3 md:mr-3">
           <h3 className={style.titleText}>Damage deposit</h3>
           <textarea
             className={style.field}
@@ -176,7 +223,7 @@ const NewRentPost = () => {
             onChange={(e) => setDamageDeposit(e.target.value)}
           ></textarea>
         </div>
-        <div className="md:w-1/5 md:ml-3">
+        <div className="md:w-1/6 md:ml-3">
           <h3 className={style.titleText}>Num of sailors</h3>
           <input
             className={style.field}
