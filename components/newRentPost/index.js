@@ -4,7 +4,7 @@ import useUser from 'hooks/useUser';
 import { createBoat } from 'services/api/boats/createBoat';
 import UploadFile from './UploadFile';
 import style from './newRentPost.module.scss';
-import { BOAT_TYPES, RENT_BY_OPTIONS } from './constants';
+import { BOAT_TYPES, BOOLEAN_OPTIONS, RENT_BY_OPTIONS } from './constants';
 
 const NewRentPost = () => {
   const { user } = useUser();
@@ -21,6 +21,11 @@ const NewRentPost = () => {
   const [minimumTime, setMinimumTime] = useState(1);
   const [damageDeposit, setDamageDeposit] = useState('');
   const [sailors, setSailors] = useState(0);
+  const [includesFood, setIncludesFood] = useState(BOOLEAN_OPTIONS[0]);
+  const [includesDrinks, setIncludesDrinks] = useState(BOOLEAN_OPTIONS[0]);
+  const [bathrooms, setBathrooms] = useState(1);
+  const [bedrooms, setBedrooms] = useState(1);
+  const [hasKitchen, setHasKitchen] = useState(BOOLEAN_OPTIONS[0]);
 
   const handleUploadFinish = (uploadedPhotoUrls) => {
     setPhotoUrls(uploadedPhotoUrls);
@@ -181,6 +186,73 @@ const NewRentPost = () => {
             value={sailors}
             onChange={(e) => setSailors(e.target.value)}
           ></input>
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row justify-between">
+        <div className="md:w-1/5 md:mr-3">
+          <h3 className={style.titleText}>Includes food</h3>
+          <select
+            className={style.field}
+            value={includesFood}
+            onChange={(e) => setIncludesFood(e.target.value)}
+          >
+            {BOOLEAN_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="md:w-1/5 md:ml-3 md:mr-3">
+          <h3 className={style.titleText}>Includes drinks</h3>
+          <select
+            className={style.field}
+            value={includesDrinks}
+            onChange={(e) => setIncludesDrinks(e.target.value)}
+          >
+            {BOOLEAN_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="md:w-1/5 md:ml-3 md:mr-3">
+          <h3 className={style.titleText}>Bathrooms</h3>
+          <input
+            className={style.field}
+            type="number"
+            min={0}
+            max={20}
+            value={bathrooms}
+            onChange={(e) => setBathrooms(e.target.value)}
+          ></input>
+        </div>
+        <div className="md:w-1/5 md:ml-3 md:mr-3">
+          <h3 className={style.titleText}>Bedrooms</h3>
+          <input
+            className={style.field}
+            type="number"
+            min={0}
+            max={20}
+            value={bedrooms}
+            onChange={(e) => setBedrooms(e.target.value)}
+          ></input>
+        </div>
+        <div className="md:w-1/5 md:ml-3">
+          <h3 className={style.titleText}>Kitchen</h3>
+          <select
+            className={style.field}
+            value={hasKitchen}
+            onChange={(e) => setHasKitchen(e.target.value)}
+          >
+            {BOOLEAN_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
