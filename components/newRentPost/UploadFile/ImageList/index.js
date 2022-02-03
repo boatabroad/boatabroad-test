@@ -30,13 +30,11 @@ const Image = ({ file, onUploadFinish }) => {
       },
       () => {
         if (!mounted) {
-          console.log('NOT MOUNTED');
           return;
         }
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           if (!mounted) {
-            console.log('NOT MOUNTED');
             return;
           }
 

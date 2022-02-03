@@ -11,6 +11,7 @@ import {
   CURRENCY_OPTIONS,
   RENT_BY_OPTIONS,
 } from './constants';
+import { validateFields } from './utils';
 
 const NewRentPost = () => {
   const { user } = useUser();
@@ -28,11 +29,11 @@ const NewRentPost = () => {
   const [priceAmount, setPriceAmount] = useState('');
   const [minimumTime, setMinimumTime] = useState(1);
   const [damageDeposit, setDamageDeposit] = useState('');
-  const [sailors, setSailors] = useState(0);
+  const [sailors, setSailors] = useState('');
   const [includesFood, setIncludesFood] = useState(BOOLEAN_OPTIONS[0]);
   const [includesDrinks, setIncludesDrinks] = useState(BOOLEAN_OPTIONS[0]);
-  const [bathrooms, setBathrooms] = useState(1);
-  const [bedrooms, setBedrooms] = useState(1);
+  const [bathrooms, setBathrooms] = useState('');
+  const [bedrooms, setBedrooms] = useState('');
   const [hasKitchen, setHasKitchen] = useState(BOOLEAN_OPTIONS[0]);
 
   const handleUploadFinish = (uploadedPhotoUrls) => {
@@ -44,6 +45,26 @@ const NewRentPost = () => {
   };
 
   const handleSubmit = () => {
+    if (
+      !validateFields({
+        photoUrls,
+        title,
+        subtitle,
+        size,
+        city,
+        beach,
+        description,
+        priceAmount,
+        minimumTime,
+        damageDeposit,
+        sailors,
+        bathrooms,
+        bedrooms,
+      })
+    ) {
+      return;
+    }
+
     createBoat({
       ownerId: user.uid,
       photos: photoUrls,
@@ -130,7 +151,7 @@ const NewRentPost = () => {
           <select
             className={style.field}
             value={crew}
-            onChange={(e) => setCrew(e.target.value === 'WithCaptain')}
+            onChange={(e) => setCrew(e.target.value)}
           >
             {CREW_OPTIONS.map((option) => (
               <option key={option} value={option}>
@@ -198,11 +219,13 @@ const NewRentPost = () => {
         </div>
         <div className="md:w-1/6 md:ml-3 md:mr-3">
           <h3 className={style.titleText}>Price per {rentBy}</h3>
-          <textarea
+          <input
             className={style.field}
+            type="number"
+            min={0}
             value={priceAmount}
             onChange={(e) => setPriceAmount(e.target.value)}
-          ></textarea>
+          ></input>
         </div>
         <div className="md:w-1/6 md:ml-3 md:mr-3">
           <h3 className={style.titleText}>Minimum {rentBy}s</h3>
@@ -217,11 +240,13 @@ const NewRentPost = () => {
         </div>
         <div className="md:w-1/6 md:ml-3 md:mr-3">
           <h3 className={style.titleText}>Damage deposit</h3>
-          <textarea
+          <input
             className={style.field}
+            type="number"
+            min={0}
             value={damageDeposit}
             onChange={(e) => setDamageDeposit(e.target.value)}
-          ></textarea>
+          ></input>
         </div>
         <div className="md:w-1/6 md:ml-3">
           <h3 className={style.titleText}>Num of sailors</h3>
@@ -304,11 +329,7 @@ const NewRentPost = () => {
       </div>
 
       <div className={style.butttonBox}>
-        <button
-          onClick={handleSubmit}
-          disabled={!photoUrls.length}
-          className={style.button}
-        >
+        <button onClick={handleSubmit} className={style.button}>
           Upload
         </button>
       </div>
