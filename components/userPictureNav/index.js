@@ -1,17 +1,8 @@
 import useUser from 'hooks/useUser';
 import Image from 'next/image';
 import React from 'react';
+import { getAvatarUrl } from 'utils/avatars/getAvatarUrl';
 import style from './userPictureNav.module.scss';
-
-const getAvatarUrl = (user) => {
-  if (!user) {
-    return null;
-  }
-
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(
-    user.name || user.email
-  )}&background=0D8ABC&color=fff&size=40&bold=true`;
-};
 
 const UserPictureNav = () => {
   const { user } = useUser();

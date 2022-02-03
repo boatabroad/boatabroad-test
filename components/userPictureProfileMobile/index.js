@@ -2,18 +2,22 @@ import React from 'react';
 import useUser from 'hooks/useUser';
 import Image from 'next/image';
 import style from './style.module.scss';
+import { getAvatarUrl } from 'utils/avatars/getAvatarUrl';
 
 const UserPictureProfileMobile = () => {
   const { user } = useUser();
 
   const name = user?.displayName;
-  const userPic = user?.photoURL;
+  const defaultAvatarUrl = getAvatarUrl(user);
+  const avatarUrl = user?.photoURL || defaultAvatarUrl;
+
+  console.log('avatarUrl', avatarUrl);
 
   return (
     <div className={style.userPictureNav}>
-      {userPic ? (
+      {avatarUrl ? (
         <Image
-          src={userPic}
+          src={avatarUrl}
           alt="Picture of the author"
           width={40}
           height={40}
