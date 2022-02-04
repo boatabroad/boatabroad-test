@@ -18,18 +18,18 @@ export const getStripeEvent = async (
   req: VercelRequest,
   res: VercelResponse
 ) => {
-  const signature = req.headers['stripe-signature'];
+  const signature = req.headers['stripe-signature'] || '';
   const body = await parseBody(req);
 
   try {
     const event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_SIGNATURE_SECRET
+      process.env.STRIPE_SIGNATURE_SECRET || ''
     );
 
     return event;
-  } catch (err) {
+  } catch (err: any) {
     console.error('Error while verifying webhook signature:', err);
 
     res.status(200).send(`Webhook Error: ${err.message}`);

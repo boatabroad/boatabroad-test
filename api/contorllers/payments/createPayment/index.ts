@@ -44,7 +44,7 @@ export const createPayment = async (
       startDate,
       endDate
     );
-  } catch (error) {
+  } catch (error: any) {
     return res.status(500).json({
       error:
         'There was an error processing your payment. Please try again later.',
@@ -65,7 +65,7 @@ export const createPayment = async (
     res.json({
       message: 'Payment created',
     });
-  } catch (error) {
+  } catch (error: any) {
     console.log('error creating payment', error);
     res.status(error.statusCode || 500).json({ error: error.message });
     await cancelBoatRental(boatId, boatRentalId);

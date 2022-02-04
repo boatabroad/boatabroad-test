@@ -23,7 +23,7 @@ export const setRole = async (req: VercelRequest, res: VercelResponse) => {
     await auth.setCustomUserClaims(user.uid, { role });
     console.log('updated user', user.uid, 'role to', role);
     res.json({ message: 'role updated' });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
 };

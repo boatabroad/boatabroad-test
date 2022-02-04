@@ -27,4 +27,7 @@ module.exports = {
     FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
     MAPBOX_KEY: process.env.MAPBOX_KEY,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
