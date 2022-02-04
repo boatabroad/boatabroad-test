@@ -58,11 +58,11 @@ const Login = () => {
             <GoogleButton />
           </div>
           <div className={style.bottom}>
-            <Link href="/ownerOrVisitor">
-              <button className={style.hover}>You Don't have Account?</button>
+            <Link href="/ownerOrVisitor" passHref>
+              <button className={style.hover}>Don't have an account?</button>
             </Link>
-            <Link href="#">
-              <button className={style.hover}>I forget my Pass</button>
+            <Link href="#" passHref>
+              <button className={style.hover}>I forgot my password</button>
             </Link>
           </div>
         </form>

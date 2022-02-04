@@ -30,5 +30,6 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     eqeqeq: 'error',
     'no-unused-vars': ['error', { args: 'none' }],
+    '@next/next/no-img-element': 'off',
   },
 };
