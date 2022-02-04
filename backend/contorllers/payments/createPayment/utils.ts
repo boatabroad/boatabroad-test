@@ -15,7 +15,7 @@ export const createBoatRental = async (
   boatId: string,
   boatRentalId: string,
   userId: string,
-  amount: boolean,
+  amount: number,
   currency: string,
   startDate: string,
   endDate: string

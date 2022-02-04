@@ -18,8 +18,8 @@ const validateSchema = (req: VercelRequest, res: VercelResponse) => {
           city: joi.string().required(),
           beach: joi.string().required(),
           description: joi.string().required(),
-          rentBy: joi.string().valid('Hour', 'Day').required(),
           price: joi.object().keys({
+            rentBy: joi.string().valid('Hour', 'Day').required(),
             amount: joi.number().min(0).required(),
             currency: joi.string().valid('USD', 'MXN').required(),
           }),

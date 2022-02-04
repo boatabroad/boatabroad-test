@@ -6,6 +6,7 @@ import stripe from 'backend/utils/stripe';
 import validateSchema from './schema';
 import { createBoatRental, cancelBoatRental } from './utils';
 import { validateBoatRental } from 'shared/utils/boat/validateBoatRental';
+import { getBoatRentalAmount } from 'shared/utils/boat/getBoatRentalAmount';
 
 export const createPayment = async (
   req: VercelRequest,
@@ -34,12 +35,13 @@ export const createPayment = async (
     });
   }
 
+  const totalAmount = getBoatRentalAmount(boat, startDate, endDate);
   try {
     await createBoatRental(
       boatId,
       boatRentalId,
       userId,
-      amount,
+      totalAmount,
       currency,
       startDate,
       endDate
@@ -54,10 +56,10 @@ export const createPayment = async (
 
   try {
     await stripe.paymentIntents.create({
-      amount: boat.price.amount * 100,
+      amount: totalAmount * 100,
       metadata: { userId, boatId, boatRentalId },
       currency: boat.price.currency,
-      description: `Rental of boat ${boatId} for $${boat.price.amount} ${boat.price.currency}`,
+      description: `Rental of boat ${boatId} for $${totalAmount} ${boat.price.currency}`,
       payment_method: id,
       confirm: true,
     });

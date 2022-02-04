@@ -9,6 +9,7 @@ import useUser from 'hooks/useUser';
 import style from './style.module.css';
 import { CARD_OPTIONS, SUCCESS_MESSAGE } from './constants';
 import { createPayment } from 'services/api/payments/createPayment';
+import { getBoatRentalAmount } from 'shared/utils/boat/getBoatRentalAmount';
 
 const PaymentForm = (props) => {
   const stripe = useStripe();
@@ -17,6 +18,10 @@ const PaymentForm = (props) => {
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
   const { boat } = props;
+  // TODO add the real start and end dates here
+  const startDate = moment('2022-02-02T19:00:00Z').tz('UTC').format();
+  const endDate = moment('2022-02-02T22:00:00Z').tz('UTC').format();
+  const amount = getBoatRentalAmount(boat, startDate, endDate);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,9 +39,8 @@ const PaymentForm = (props) => {
           id,
           userId: user.uid,
           boatId: boat.id,
-          // TODO add the real start and end dates here
-          startDate: moment('2022-02-02T19:00:00Z').tz('UTC').format(),
-          endDate: moment('2022-02-02T22:00:00Z').tz('UTC').format(),
+          startDate,
+          endDate,
           amount: boat.price.amount,
           currency: boat.price.currency,
         });
@@ -82,7 +86,7 @@ const PaymentForm = (props) => {
           </div>
         ) : (
           <button type="submit" className={style.payButton}>
-            Pay ${boat.price.amount} {boat.price.currency}
+            Pay ${amount} {boat.price.currency}
           </button>
         )}
       </form>
