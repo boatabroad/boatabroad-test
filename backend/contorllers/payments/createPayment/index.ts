@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { collection, doc, getDoc } from 'firebase/firestore';
 import { v4 as uuid } from 'uuid';
 import { db } from 'shared/utils/firebase';
-import stripe from 'api/utils/stripe';
+import stripe from 'backend/utils/stripe';
 import validateSchema from './schema';
 import { createBoatRental, cancelBoatRental } from './utils';
 import { validateBoatRental } from 'shared/utils/boat/validateBoatRental';

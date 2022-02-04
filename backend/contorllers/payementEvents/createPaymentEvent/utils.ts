@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { collection, updateDoc, doc } from 'firebase/firestore';
-import stripe from 'api/utils/stripe';
+import stripe from 'backend/utils/stripe';
 import { db } from 'shared/utils/firebase';
 
 const parseBody = (req: VercelRequest): Promise<string> =>

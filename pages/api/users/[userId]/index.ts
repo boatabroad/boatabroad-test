@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { setRole } from 'api/contorllers/users/setRole';
+import { setRole } from 'backend/contorllers/users/setRole';
 
 export default function (req: VercelRequest, res: VercelResponse) {
   if (req.method === 'PATCH') {

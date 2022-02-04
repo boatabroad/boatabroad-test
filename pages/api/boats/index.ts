@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { createBoat } from 'api/contorllers/boats/createBoat';
+import { createBoat } from 'backend/contorllers/boats/createBoat';
 
 export default function (req: VercelRequest, res: VercelResponse) {
   if (req.method === 'POST') {

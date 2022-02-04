@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { createPayment } from 'api/contorllers/payments/createPayment';
+import { createPayment } from 'backend/contorllers/payments/createPayment';
 
 export default function (req: VercelRequest, res: VercelResponse) {
   if (req.method === 'POST') {
