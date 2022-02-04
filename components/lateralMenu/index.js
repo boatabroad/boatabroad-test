@@ -14,7 +14,7 @@ const LateralMenu = () => {
       {sharePath.map((item, index) => {
         const color = pathname === item.href ? '#00bfc1' : 'grey';
         return (
-          <Link href={item.href} key={index}>
+          <Link href={item.href} key={index} passHref>
             <div className={style.iconAndText}>
               <item.Icon color={color} className={style.icon} />
               <p
