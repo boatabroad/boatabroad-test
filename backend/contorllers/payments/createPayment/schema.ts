@@ -13,6 +13,7 @@ const validateSchema = (req: VercelRequest, res: VercelResponse) => {
           boatId: joi.string().required(),
           startDate: joi.string().isoDate().required(),
           endDate: joi.string().isoDate().required(),
+          rentBy: joi.string().valid('Hour', 'Day').required(),
           amount: joi.number().positive().required(),
           currency: joi.string().required(),
         })

@@ -41,6 +41,7 @@ const PaymentForm = (props) => {
           boatId: boat.id,
           startDate,
           endDate,
+          rentBy: boat.price.rentBy,
           amount: boat.price.amount,
           currency: boat.price.currency,
         });

@@ -53,6 +53,7 @@ const boatRentalValidation = async (boat, startDate, endDate) => {
 
 export const validateBoatRental = async (
   boat,
+  rentBy,
   amount,
   currency,
   startDate,
@@ -73,7 +74,11 @@ export const validateBoatRental = async (
     };
   }
 
-  if (boat.price.amount !== amount || boat.price.currency !== currency) {
+  if (
+    boat.price.rentBy !== rentBy ||
+    boat.price.amount !== amount ||
+    boat.price.currency !== currency
+  ) {
     return {
       status: 409,
       error:

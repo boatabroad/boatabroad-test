@@ -16,12 +16,14 @@ export const createPayment = async (
   if (res.headersSent) {
     return;
   }
-  const { id, userId, boatId, amount, currency, startDate, endDate } = req.body;
+  const { id, userId, boatId, rentBy, amount, currency, startDate, endDate } =
+    req.body;
   const boatRentalId = uuid();
   let boat: any = await getDoc(doc(collection(db, 'boats'), boatId));
   boat = { id: boat.id, ...boat.data() };
   const validation = await validateBoatRental(
     boat,
+    rentBy,
     amount,
     currency,
     startDate,

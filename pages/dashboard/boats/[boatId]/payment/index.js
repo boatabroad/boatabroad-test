@@ -38,7 +38,8 @@ const PaymentPage = () => {
 
         if (
           boatRef.current &&
-          (data.price.amount !== boatRef.current.price.amount ||
+          (data.price.rentBy !== boatRef.current.price.rentBy ||
+            data.price.amount !== boatRef.current.price.amount ||
             data.price.currency !== boatRef.current.price.currency)
         ) {
           sweetAlert(
@@ -50,6 +51,7 @@ const PaymentPage = () => {
 
         const validation = await validateBoatRental(
           data,
+          data.price.rentBy,
           data.price.amount,
           data.price.currency,
           null,

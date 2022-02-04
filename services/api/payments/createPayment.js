@@ -6,6 +6,7 @@ export const createPayment = ({
   boatId,
   startDate,
   endDate,
+  rentBy,
   amount,
   currency,
 }) =>
@@ -15,6 +16,7 @@ export const createPayment = ({
     boatId,
     startDate,
     endDate,
+    rentBy,
     amount,
     currency,
   });
