@@ -12,7 +12,7 @@ const validateSchema = (req: VercelRequest, res: VercelResponse) => {
           photos: joi.array().min(1).items(joi.string()).required(),
           title: joi.string().required(),
           subtitle: joi.string().required(),
-          boatType: joi.string().required(),
+          type: joi.string().required(),
           size: joi.number().min(0).required(),
           crew: joi.number().min(0).required(),
           city: joi.string().required(),

@@ -6,17 +6,17 @@ function Cards({ img, title }) {
   const [searchInput] = useState('');
   const [startDate] = useState(new Date());
   const [endDate] = useState(new Date());
-  const [noOfSailors] = useState();
+  const [sailors] = useState();
   const router = useRouter();
 
   const search = () => {
     router.push({
       pathname: '/search',
       query: {
-        location: searchInput,
+        search: searchInput,
         startDate: startDate.toISOString(),
         endDate: endDate.toISOString(),
-        noOfSailors,
+        sailors,
       },
     });
   };

@@ -11,7 +11,7 @@ function Header({ placeholder }) {
   const [searchInput, setSearchInput] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [noOfSailors, setNoOfSailors] = useState(1);
+  const [sailors, setSailors] = useState(1);
   const router = useRouter();
   const [menuPopup, setMenuPopup] = useState(false);
 
@@ -28,10 +28,10 @@ function Header({ placeholder }) {
     router.push({
       pathname: '/search',
       query: {
-        location: searchInput,
+        search: searchInput,
         startDate: startDate.toISOString(),
         endDate: endDate.toISOString(),
-        noOfSailors,
+        sailors,
       },
     });
   };
@@ -110,8 +110,8 @@ function Header({ placeholder }) {
             </h2>
             <UsersIcon className="h-5" />
             <input
-              value={noOfSailors}
-              onChange={(e) => setNoOfSailors(e.target.value)}
+              value={sailors}
+              onChange={(e) => setSailors(e.target.value)}
               min={1}
               className="w-12 pl-4 text-lg text-red-500 outline-none"
               type="number"

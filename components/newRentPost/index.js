@@ -18,7 +18,7 @@ const NewRentPost = () => {
   const [photoUrls, setPhotoUrls] = useState([]);
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
-  const [boatType, setBoatType] = useState(BOAT_TYPES[0]);
+  const [type, setType] = useState(BOAT_TYPES[0]);
   const [size, setSize] = useState('');
   const [crew, setCrew] = useState(CREW_OPTIONS[0]);
   const [city, setCity] = useState('');
@@ -70,7 +70,7 @@ const NewRentPost = () => {
       photos: photoUrls,
       title,
       subtitle,
-      boatType,
+      type,
       size: +size,
       crew: +crew,
       city,
@@ -96,7 +96,7 @@ const NewRentPost = () => {
         sweetAlert(
           'Error',
           'There was an error creating the boat, please try again later.',
-          'error'
+          'error',
         );
       });
   };
@@ -125,12 +125,12 @@ const NewRentPost = () => {
           <h3 className={style.titleText}>Boat type</h3>
           <select
             className={style.field}
-            value={boatType}
-            onChange={(e) => setBoatType(e.target.value)}
+            value={type}
+            onChange={(e) => setType(e.target.value)}
           >
-            {BOAT_TYPES.map((type) => (
-              <option key={type} value={type}>
-                {type}
+            {BOAT_TYPES.map((_type) => (
+              <option key={_type} value={_type}>
+                {_type}
               </option>
             ))}
           </select>

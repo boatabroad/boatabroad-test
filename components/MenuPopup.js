@@ -22,42 +22,42 @@ export const MenuPopup = () => {
         ) : user ? (
           <>
             <UserPictureProfileMobile />
-            <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
-              <Link href="/dashboard">
-                <a className="cursor-pointer">Dashboard</a>
-              </Link>
-            </li>
+            <Link href="/dashboard" passHref>
+              <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
+                Dashboard
+              </li>
+            </Link>
             <li
               className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white"
               onClick={handleLogOut}
             >
-              <div className="cursor-pointer">Log out</div>
+              Log out
             </li>
           </>
         ) : (
           <>
-            <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
-              <Link href="/login">
-                <a className="cursor-pointer">Login</a>
-              </Link>
-            </li>
-            <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
-              <Link href="/ownerOrVisitor">
-                <a className="cursor-pointer">Sign up</a>
-              </Link>
-            </li>
+            <Link href="/login" passHref>
+              <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
+                Login
+              </li>
+            </Link>
+            <Link href="/ownerOrVisitor" passHref>
+              <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
+                Sign up
+              </li>
+            </Link>
           </>
         )}
-        <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
-          <Link href="#">
-            <a className="cursor-pointer">Host your boat</a>
-          </Link>
-        </li>
-        <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
-          <Link href="/help">
-            <a className="cursor-pointer">Help</a>
-          </Link>
-        </li>
+        <Link href="#" passHref>
+          <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
+            Host your boat
+          </li>
+        </Link>
+        <Link href="/help" passHref>
+          <li className="cursor-pointer text-gray-800 px-4 md:px-2 py-2 hover:bg-gray-100 md:hover:text-[#00BFC1] md:hover:bg-white">
+            Help
+          </li>
+        </Link>
       </ul>
     </div>
   );

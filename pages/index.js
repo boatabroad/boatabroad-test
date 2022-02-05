@@ -22,7 +22,7 @@ export default function Home({ exploreData, cardsData }) {
                 key={img}
                 img={img}
                 distance={distance}
-                location={location}
+                search={location}
               />
             ))}
           </div>
@@ -56,11 +56,11 @@ export default function Home({ exploreData, cardsData }) {
 
 export async function getStaticProps() {
   const exploreData = await fetch('https://jsonkeeper.com/b/NJ7H').then((res) =>
-    res.json()
+    res.json(),
   );
 
   const cardsData = await fetch('https://jsonkeeper.com/b/UM02').then((res) =>
-    res.json()
+    res.json(),
   );
 
   return {
